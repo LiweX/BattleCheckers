@@ -43,7 +43,7 @@ public class Ficha implements SujetoObservable {
 		return tipo;
 	}
 	
-	//Otros métodos
+	//Otros metodos
 	public void enlazarObservadores(Observador o) {
 		observadores.add(o);
 	}
