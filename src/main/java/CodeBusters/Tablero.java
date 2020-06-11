@@ -14,8 +14,8 @@ public class Tablero extends JFrame implements ActionListener {
     public Tablero() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        fichaRoja = new ImageIcon("images/fichaRoja.png");
-        fichaBlanca = new ImageIcon("images/fichaBlanca.png");
+        fichaRoja = new ImageIcon(getClass().getResource("fichaRoja.png"));
+        fichaBlanca = new ImageIcon(getClass().getResource("fichaBlanca.png"));
         //vacio = new ImageIcon();
         new ImageIcon();
         
