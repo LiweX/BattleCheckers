@@ -1,27 +1,32 @@
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 import java.awt.event.*;
 
-public class Tablero extends JFrame implements ActionListener,Observador {
+public class Tablero extends JFrame implements ActionListener {
+    private static final long serialVersionUID = 1L;
     private JMenuBar menubar;
-    private JMenu juego,ayuda;
-    private JMenuItem nuevaPartida,salir,acercaDe,comoJugar;
+    private JMenu juego, ayuda;
+    private JMenuItem nuevaPartida, salir, acercaDe, comoJugar;
     private JButton b1,d1,f1,h1,a2,c2,e2,g2,b3,d3,f3,h3,a4,c4,e4,g4,b5,d5,f5,h5,a6,c6,e6,g6,b7,d7,f7,h7,a8,c8,e8,g8;
-    private ImageIcon fichaRoja,fichaBlanca,vacio;
-    
+    private ImageIcon fichaRoja, fichaBlanca; //vacio;
+
     public Tablero() {
-    	setDefaultCloseOperation(EXIT_ON_CLOSE);
-    	
-    	fichaRoja = new ImageIcon(getClass().getResource("fichaRoja.png"));
-    	fichaBlanca = new ImageIcon(getClass().getResource("fichaBlanca.png"));
-    	vacio = new ImageIcon();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        fichaRoja = new ImageIcon("images/fichaRoja.png");
+        fichaBlanca = new ImageIcon("images/fichaBlanca.png");
+        //vacio = new ImageIcon();
+        new ImageIcon();
         
     	setLayout(null);
+        
         menubar = new JMenuBar();
+        
         setJMenuBar(menubar);
 
         juego = new JMenu("Juego");
         menubar.add(juego);
+        
         ayuda = new JMenu("Ayuda");
         menubar.add(ayuda);
 
@@ -325,32 +330,30 @@ public class Tablero extends JFrame implements ActionListener,Observador {
     }
     
     public void actionPerformed(ActionEvent e){
-        if(e.getSource() == nuevaPartida){
+        if(e.getSource() == nuevaPartida) {
             PedirNombres pedirNombres = new PedirNombres();
+            
             pedirNombres.setBounds(0,0,240,170);
             pedirNombres.setVisible(true);
             pedirNombres.setResizable(false);
             pedirNombres.setLocationRelativeTo(null);
             pedirNombres.setTitle("Ingresar nombres");
+            
             this.setVisible(false);
-
         }
-        if(e.getSource() == salir){
-            System.exit(0);
+        
+        if(e.getSource() == salir) System.exit(0);
 
-        }
-        if(e.getSource() == comoJugar){
+        if(e.getSource() == comoJugar) {
             ComoJugar tutorial = new ComoJugar();
+            
             tutorial.setBounds(0,0,640,450);
             tutorial.setVisible(true);
             tutorial.setResizable(false);
             tutorial.setLocationRelativeTo(null);
             tutorial.setTitle("Como Jugar");
-
         }
-        if(e.getSource() == acercaDe){
-            JOptionPane.showMessageDialog(null,"aca va info nuestra");
-        }
+        if(e.getSource() == acercaDe) JOptionPane.showMessageDialog(null,"aca va info nuestra");
 
         if(e.getSource() == b1){
 
@@ -452,6 +455,6 @@ public class Tablero extends JFrame implements ActionListener,Observador {
     }
 
     public void update(){
-    	//TODO
+
     }
 }
