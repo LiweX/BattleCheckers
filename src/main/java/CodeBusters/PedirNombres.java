@@ -1,5 +1,6 @@
-import javax.swing.*;
 import java.awt.event.*;
+
+import javax.swing.*;
 
 public class PedirNombres extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -32,13 +33,13 @@ public class PedirNombres extends JFrame implements ActionListener {
 
         aceptar = new JButton("Aceptar");
         aceptar.setBounds(10,90,100,30);
-        add(aceptar);
         aceptar.addActionListener(this);
+        add(aceptar);
     }
 
-    public boolean checkNames(String n1, String n2) {
-        if(n1.equals(n2)) return true;
-        else return false;
+    public boolean chequearNombres(String n1, String n2) {
+        if(n1.equals("") || n2.equals("") || n1.equals(n2)) return false;
+        else return true;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -46,8 +47,7 @@ public class PedirNombres extends JFrame implements ActionListener {
             nombre1 = cuadroTexto1.getText().trim();
             nombre2 = cuadroTexto2.getText().trim();
             
-            if(nombre1.equals("") || nombre2.equals("")) JOptionPane.showMessageDialog(null,"Ambos jugadores deben tener nombre");
-            else if(nombre1.equals(nombre2)) JOptionPane.showMessageDialog(null, "Los jugadores no pueden tener el mismo nombre");
+            if(!chequearNombres(nombre1,nombre2)) JOptionPane.showMessageDialog(null,"Ambos jugadores deben tener nombres y deben ser distintos");
             else {
                 Tablero tablero = new Tablero();
                 

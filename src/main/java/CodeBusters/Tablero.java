@@ -1,6 +1,7 @@
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
+
+import javax.swing.*;
 
 public class Tablero extends JFrame implements ActionListener {
     private static final long serialVersionUID = 1L;
@@ -353,6 +354,7 @@ public class Tablero extends JFrame implements ActionListener {
             tutorial.setLocationRelativeTo(null);
             tutorial.setTitle("Como Jugar");
         }
+
         if(e.getSource() == acercaDe) JOptionPane.showMessageDialog(null,"aca va info nuestra");
 
         if(e.getSource() == b1){
@@ -451,10 +453,9 @@ public class Tablero extends JFrame implements ActionListener {
         if(e.getSource() == g8){
 
         }
-
     }
 
     public void update(){
-
+        //TODO
     }
 }
