@@ -1,6 +1,7 @@
 import java.awt.*;
-import javax.swing.*;
 import java.awt.event.*;
+
+import javax.swing.*;
 
 public class ComoJugar extends JFrame implements ActionListener {
     private static final long serialVersionUID = -6840333612628077763L;
