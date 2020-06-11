@@ -1,15 +1,15 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Estadisticas extends JFrame implements ActionListener {
+import javax.swing.*;
 
-    private JLabel jugador1,jugador2, piezasComidas, tituloHistorial;
+public class Estadisticas extends JFrame implements ActionListener {
+    private static final long serialVersionUID = 1L;
+    private JLabel jugador1, jugador2, piezasComidas, tituloHistorial;
     private JScrollPane scrollPane;
     private JTextArea historial;
 
-
-    public Estadisticas(){
+    public Estadisticas() {
         setLayout(null);
 
         piezasComidas = new JLabel("Piezas comidas");
@@ -32,13 +32,10 @@ public class Estadisticas extends JFrame implements ActionListener {
         tituloHistorial.setBounds(20,170,300,20);
         add(tituloHistorial);
 
-
         historial = new JTextArea();
         scrollPane = new JScrollPane(historial);
         scrollPane.setBounds(10,200,266,400);
         add(scrollPane);
-
-
     }
 
     public void actionPerformed(ActionEvent e){

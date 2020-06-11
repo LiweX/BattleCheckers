@@ -1,20 +1,33 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Tablero extends JFrame implements ActionListener{
-    private JMenuBar menubar;
-    private JMenu juego,ayuda;
-    private JMenuItem nuevaPartida,salir,acercaDe,comoJugar;
-    private JButton b1,d1,f1,h1,a2,c2,e2,g2,b3,d3,f3,h3,a4,c4,e4,g4,b5,d5,f5,h5,a6,c6,e6,g6,b7,d7,f7,h7,a8,c8,e8,g8;
+import javax.swing.*;
 
-    public Tablero(){
-        setLayout(null);
+public class Tablero extends JFrame implements ActionListener {
+    private static final long serialVersionUID = 1L;
+    private JMenuBar menubar;
+    private JMenu juego, ayuda;
+    private JMenuItem nuevaPartida, salir, acercaDe, comoJugar;
+    private JButton b1,d1,f1,h1,a2,c2,e2,g2,b3,d3,f3,h3,a4,c4,e4,g4,b5,d5,f5,h5,a6,c6,e6,g6,b7,d7,f7,h7,a8,c8,e8,g8;
+    private ImageIcon fichaRoja, fichaBlanca; //vacio;
+
+    public Tablero() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        fichaRoja = new ImageIcon(getClass().getResource("fichaRoja.png"));
+        fichaBlanca = new ImageIcon(getClass().getResource("fichaBlanca.png"));
+        //vacio = new ImageIcon();
+        new ImageIcon();
+        
+    	setLayout(null);
+        
         menubar = new JMenuBar();
+        
         setJMenuBar(menubar);
 
         juego = new JMenu("Juego");
         menubar.add(juego);
+        
         ayuda = new JMenu("Ayuda");
         menubar.add(ayuda);
 
@@ -34,11 +47,8 @@ public class Tablero extends JFrame implements ActionListener{
         acercaDe.addActionListener(this);
         ayuda.add(acercaDe);
 
-        ImageIcon fichaRoja = new ImageIcon("images/fichaRoja.png");
-        ImageIcon nada = new ImageIcon();
         b1 = new JButton();
-        b1.setIcon(fichaRoja);
-        //b1.setIcon(nada);
+        b1.setIcon(fichaBlanca);
         b1.setBounds(80,0,80,80);
         b1.setBackground(new Color(0,0,0));
         b1.setBorderPainted(false);
@@ -47,6 +57,7 @@ public class Tablero extends JFrame implements ActionListener{
         b1.addActionListener(this);
 
         d1 = new JButton();
+        d1.setIcon(fichaBlanca);
         d1.setBounds(240,0,80,80);
         d1.setBackground(new Color(0,0,0));
         d1.setBorderPainted(false);
@@ -55,6 +66,7 @@ public class Tablero extends JFrame implements ActionListener{
         d1.addActionListener(this);
 
         f1 = new JButton();
+        f1.setIcon(fichaBlanca);
         f1.setBounds(400,0,80,80);
         f1.setBackground(new Color(0,0,0));
         f1.setBorderPainted(false);
@@ -63,6 +75,7 @@ public class Tablero extends JFrame implements ActionListener{
         f1.addActionListener(this);
 
         h1 = new JButton();
+        h1.setIcon(fichaBlanca);
         h1.setBounds(560,0,80,80);
         h1.setBackground(new Color(0,0,0));
         h1.setBorderPainted(false);
@@ -71,6 +84,7 @@ public class Tablero extends JFrame implements ActionListener{
         h1.addActionListener(this);
 
         a2 = new JButton();
+        a2.setIcon(fichaBlanca);
         a2.setBounds(0,80,80,80);
         a2.setBackground(new Color(0,0,0));
         a2.setBorderPainted(false);
@@ -79,6 +93,7 @@ public class Tablero extends JFrame implements ActionListener{
         a2.addActionListener(this);
 
         c2 = new JButton();
+        c2.setIcon(fichaBlanca);
         c2.setBounds(160,80,80,80);
         c2.setBackground(new Color(0,0,0));
         c2.setBorderPainted(false);
@@ -87,6 +102,7 @@ public class Tablero extends JFrame implements ActionListener{
         c2.addActionListener(this);
 
         e2 = new JButton();
+        e2.setIcon(fichaBlanca);
         e2.setBounds(320,80,80,80);
         e2.setBackground(new Color(0,0,0));
         e2.setBorderPainted(false);
@@ -95,6 +111,7 @@ public class Tablero extends JFrame implements ActionListener{
         e2.addActionListener(this);
 
         g2 = new JButton();
+        g2.setIcon(fichaBlanca);
         g2.setBounds(480,80,80,80);
         g2.setBackground(new Color(0,0,0));
         g2.setBorderPainted(false);
@@ -103,6 +120,7 @@ public class Tablero extends JFrame implements ActionListener{
         g2.addActionListener(this);
 
         b3 = new JButton();
+        b3.setIcon(fichaBlanca);
         b3.setBounds(80,160,80,80);
         b3.setBackground(new Color(0,0,0));
         b3.setBorderPainted(false);
@@ -111,6 +129,7 @@ public class Tablero extends JFrame implements ActionListener{
         b3.addActionListener(this);
 
         d3 = new JButton();
+        d3.setIcon(fichaBlanca);
         d3.setBounds(240,160,80,80);
         d3.setBackground(new Color(0,0,0));
         d3.setBorderPainted(false);
@@ -119,6 +138,7 @@ public class Tablero extends JFrame implements ActionListener{
         d3.addActionListener(this);
 
         f3 = new JButton();
+        f3.setIcon(fichaBlanca);
         f3.setBounds(400,160,80,80);
         f3.setBackground(new Color(0,0,0));
         f3.setBorderPainted(false);
@@ -127,6 +147,7 @@ public class Tablero extends JFrame implements ActionListener{
         f3.addActionListener(this);
 
         h3 = new JButton();
+        h3.setIcon(fichaBlanca);
         h3.setBounds(560,160,80,80);
         h3.setBackground(new Color(0,0,0));
         h3.setBorderPainted(false);
@@ -199,6 +220,7 @@ public class Tablero extends JFrame implements ActionListener{
         h5.addActionListener(this);
 
         a6 = new JButton();
+        a6.setIcon(fichaRoja);
         a6.setBounds(0,400,80,80);
         a6.setBackground(new Color(0,0,0));
         a6.setBorderPainted(false);
@@ -207,6 +229,7 @@ public class Tablero extends JFrame implements ActionListener{
         a6.addActionListener(this);
 
         c6 = new JButton();
+        c6.setIcon(fichaRoja);
         c6.setBounds(160,400,80,80);
         c6.setBackground(new Color(0,0,0));
         c6.setBorderPainted(false);
@@ -215,6 +238,7 @@ public class Tablero extends JFrame implements ActionListener{
         c6.addActionListener(this);
 
         e6 = new JButton();
+        e6.setIcon(fichaRoja);
         e6.setBounds(320,400,80,80);
         e6.setBackground(new Color(0,0,0));
         e6.setBorderPainted(false);
@@ -223,6 +247,7 @@ public class Tablero extends JFrame implements ActionListener{
         e6.addActionListener(this);
 
         g6 = new JButton();
+        g6.setIcon(fichaRoja);
         g6.setBounds(480,400,80,80);
         g6.setBackground(new Color(0,0,0));
         g6.setBorderPainted(false);
@@ -231,6 +256,7 @@ public class Tablero extends JFrame implements ActionListener{
         g6.addActionListener(this);
 
         b7 = new JButton();
+        b7.setIcon(fichaRoja);
         b7.setBounds(80,480,80,80);
         b7.setBackground(new Color(0,0,0));
         b7.setBorderPainted(false);
@@ -239,6 +265,8 @@ public class Tablero extends JFrame implements ActionListener{
         b7.addActionListener(this);
 
         d7 = new JButton();
+        d7.setIcon(fichaRoja);
+        d7.setIcon(fichaRoja);
         d7.setBounds(240,480,80,80);
         d7.setBackground(new Color(0,0,0));
         d7.setBorderPainted(false);
@@ -247,6 +275,7 @@ public class Tablero extends JFrame implements ActionListener{
         d7.addActionListener(this);
 
         f7 = new JButton();
+        f7.setIcon(fichaRoja);
         f7.setBounds(400,480,80,80);
         f7.setBackground(new Color(0,0,0));
         f7.setBorderPainted(false);
@@ -255,6 +284,7 @@ public class Tablero extends JFrame implements ActionListener{
         f7.addActionListener(this);
 
         h7 = new JButton();
+        h7.setIcon(fichaRoja);
         h7.setBounds(560,480,80,80);
         h7.setBackground(new Color(0,0,0));
         h7.setBorderPainted(false);
@@ -263,6 +293,7 @@ public class Tablero extends JFrame implements ActionListener{
         h7.addActionListener(this);
 
         a8 = new JButton();
+        a8.setIcon(fichaRoja);
         a8.setBounds(0,560,80,80);
         a8.setBackground(new Color(0,0,0));
         a8.setBorderPainted(false);
@@ -271,6 +302,7 @@ public class Tablero extends JFrame implements ActionListener{
         a8.addActionListener(this);
 
         c8 = new JButton();
+        c8.setIcon(fichaRoja);
         c8.setBounds(160,560,80,80);
         c8.setBackground(new Color(0,0,0));
         c8.setBorderPainted(false);
@@ -279,6 +311,7 @@ public class Tablero extends JFrame implements ActionListener{
         c8.addActionListener(this);
 
         e8 = new JButton();
+        e8.setIcon(fichaRoja);
         e8.setBounds(320,560,80,80);
         e8.setBackground(new Color(0,0,0));
         e8.setBorderPainted(false);
@@ -287,6 +320,7 @@ public class Tablero extends JFrame implements ActionListener{
         e8.addActionListener(this);
 
         g8 = new JButton();
+        g8.setIcon(fichaRoja);
         g8.setBounds(480,560,80,80);
         g8.setBackground(new Color(0,0,0));
         g8.setBorderPainted(false);
@@ -295,33 +329,33 @@ public class Tablero extends JFrame implements ActionListener{
         g8.addActionListener(this);
 
     }
+    
     public void actionPerformed(ActionEvent e){
-        if(e.getSource() == nuevaPartida){
+        if(e.getSource() == nuevaPartida) {
             PedirNombres pedirNombres = new PedirNombres();
+            
             pedirNombres.setBounds(0,0,240,170);
             pedirNombres.setVisible(true);
             pedirNombres.setResizable(false);
             pedirNombres.setLocationRelativeTo(null);
             pedirNombres.setTitle("Ingresar nombres");
+            
             this.setVisible(false);
-
         }
-        if(e.getSource() == salir){
-            System.exit(0);
+        
+        if(e.getSource() == salir) System.exit(0);
 
-        }
-        if(e.getSource() == comoJugar){
+        if(e.getSource() == comoJugar) {
             ComoJugar tutorial = new ComoJugar();
+            
             tutorial.setBounds(0,0,640,450);
             tutorial.setVisible(true);
             tutorial.setResizable(false);
             tutorial.setLocationRelativeTo(null);
             tutorial.setTitle("Como Jugar");
+        }
 
-        }
-        if(e.getSource() == acercaDe){
-            JOptionPane.showMessageDialog(null,"aca va info nuestra");
-        }
+        if(e.getSource() == acercaDe) JOptionPane.showMessageDialog(null,"aca va info nuestra");
 
         if(e.getSource() == b1){
 
@@ -419,7 +453,9 @@ public class Tablero extends JFrame implements ActionListener{
         if(e.getSource() == g8){
 
         }
-
     }
 
+    public void update(){
+        //TODO
+    }
 }

@@ -1,28 +1,48 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MenuPrincipal extends JFrame implements ActionListener {
-    private JButton nueva_partida, como_jugar, salir;
-    private JLabel titulo,marca;
+import javax.swing.*;
 
-    public MenuPrincipal(){
+public class MenuPrincipal extends JFrame implements ActionListener {
+    private static final long serialVersionUID = 1L;
+    private JButton nueva_partida, como_jugar, salir;
+    private JLabel titulo, marca;
+    private ComoJugar tutorial;
+    private PedirNombres pedirNombres;
+
+    public MenuPrincipal() {
         setLayout(null);
+        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        tutorial = new ComoJugar();
+
+        tutorial.setBounds(0,0,640,450);
+        tutorial.setResizable(false);
+        tutorial.setLocationRelativeTo(null);
+        tutorial.setTitle("Como Jugar");
+
+        pedirNombres = new PedirNombres();
+
+        pedirNombres.setBounds(0,0,300,170);
+        pedirNombres.setResizable(false);
+        pedirNombres.setLocationRelativeTo(null);
+        pedirNombres.setTitle("Ingresar nombres");
+
         nueva_partida = new JButton("Nueva Partida");
         nueva_partida.setBounds(80,300,120,20);
-        add(nueva_partida);
         nueva_partida.addActionListener(this);
+        add(nueva_partida);
 
         como_jugar = new JButton("Como Jugar");
         como_jugar.setBounds(80,340,120,20);
-        add(como_jugar);
         como_jugar.addActionListener(this);
+        add(como_jugar);
 
         salir = new JButton("Salir");
         salir.setBounds(80,380,120,20);
-        add(salir);
         salir.addActionListener(this);
+        add(salir);
 
         titulo = new JLabel("BattleCheckers");
         titulo.setFont(new Font("Arial",3,18));
@@ -33,33 +53,19 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         marca.setFont(new Font("Arial",3,10));
         marca.setBounds(95,530,300,30);
         add(marca);
-
     }
 
-    public void actionPerformed(ActionEvent e){
-        if(e.getSource() == salir){
-           System.exit(0);
-        }
-        if(e.getSource() == como_jugar){
-            ComoJugar tutorial = new ComoJugar();
-            tutorial.setBounds(0,0,640,450);
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == salir) System.exit(0);
+
+        if(e.getSource() == como_jugar) {
             tutorial.setVisible(true);
-            tutorial.setResizable(false);
-            tutorial.setLocationRelativeTo(null);
-            tutorial.setTitle("Como Jugar");
             this.setVisible(false);
-
-
         }
-        if(e.getSource() == nueva_partida){
-            PedirNombres pedirNombres = new PedirNombres();
-            pedirNombres.setBounds(0,0,300,170);
-            pedirNombres.setVisible(true);
-            pedirNombres.setResizable(false);
-            pedirNombres.setLocationRelativeTo(null);
-            pedirNombres.setTitle("Ingresar nombres");
-            this.setVisible(false);
 
+        if(e.getSource() == nueva_partida) {
+            pedirNombres.setVisible(true);
+            this.setVisible(false);
         }
     }
 }
