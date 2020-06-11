@@ -12,9 +12,8 @@ public class BCTest {
 
     @Test
     public void test1() {
-        boolean esperado = false;
         boolean obtuve = pedir.checkNames("pepe","pepe");
 
-        Assert.assertEquals(esperado,obtuve);
+        Assert.assertEquals(true,obtuve);
     }
 }
