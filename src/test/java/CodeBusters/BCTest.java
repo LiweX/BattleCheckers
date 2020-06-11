@@ -1,19 +1,21 @@
-import org.junit.BeforeClass;
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
 
 public class BCTest {
     private static PedirNombres pedir;
+    private static String n1, n2;
 
     @BeforeClass
     public static void beforeClass() {
         pedir = new PedirNombres();
+        n1 = "nombreJugador1";
+        n2 = "nombreJugador2";
     }
 
     @Test
-    public void test1() {
-        boolean obtuve = pedir.checkNames("pepe","pepe");
-
-        Assert.assertEquals(true,obtuve);
+    public void testNombres() {
+        boolean actual = pedir.chequearNombres(n1,n2);
+        Assert.assertEquals(true,actual);
     }
 }
