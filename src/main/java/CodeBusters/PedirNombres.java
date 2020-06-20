@@ -1,3 +1,5 @@
+package CodeBusters;
+
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -15,11 +17,11 @@ public class PedirNombres extends JFrame implements ActionListener {
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        jugador1 = new JLabel("Nombre Jugador 1:");
+        jugador1 = new JLabel("Nombre Jugador 1(blancas):");
         jugador1.setBounds(10,10,120,30);
         add(jugador1);
 
-        jugador2 = new JLabel("Nombre Jugador 2:");
+        jugador2 = new JLabel("Nombre Jugador 2(rojas):");
         jugador2.setBounds(10,42,120,30);
         add(jugador2);
 
@@ -36,7 +38,9 @@ public class PedirNombres extends JFrame implements ActionListener {
         aceptar.addActionListener(this);
         add(aceptar);
     }
-
+    /*
+        @param  n1, n2: Nombres a comparar.
+    */
     public boolean chequearNombres(String n1, String n2) {
         if(n1.equals("") || n2.equals("") || n1.equals(n2)) return false;
         else return true;
@@ -49,6 +53,7 @@ public class PedirNombres extends JFrame implements ActionListener {
             
             if(!chequearNombres(nombre1,nombre2)) JOptionPane.showMessageDialog(null,"Ambos jugadores deben tener nombres y deben ser distintos");
             else {
+                
                 Tablero tablero = new Tablero();
                 
                 tablero.setBounds(0,0,656,702);
@@ -56,6 +61,7 @@ public class PedirNombres extends JFrame implements ActionListener {
                 tablero.setResizable(false);
 
                 this.setVisible(false);
+                Juego juego = new Juego(tablero);
 
                 Main.jugando = true;
 

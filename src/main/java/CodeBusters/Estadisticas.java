@@ -1,3 +1,5 @@
+package CodeBusters;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -8,6 +10,8 @@ public class Estadisticas extends JFrame implements ActionListener {
     private JLabel jugador1, jugador2, piezasComidas, tituloHistorial;
     private JScrollPane scrollPane;
     private JTextArea historial;
+    private int cantidadMovimientos;
+    private int cantidadEliminaciones;
 
     public Estadisticas() {
         setLayout(null);
@@ -38,7 +42,16 @@ public class Estadisticas extends JFrame implements ActionListener {
         add(scrollPane);
     }
 
-    public void actionPerformed(ActionEvent e){
-
+    public void actionPerformed(ActionEvent e) {
+        //TODO
     }
+
+    public void addEliminacion(){
+        cantidadEliminaciones++;
+    }
+
+    public void addMovimiento(){
+        cantidadMovimientos++;
+    }
+
 }

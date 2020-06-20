@@ -1,3 +1,5 @@
+package CodeBusters;
+
 public class Main {
     MenuPrincipal menu;
     ComoJugar tutorial;
