@@ -78,12 +78,12 @@ public class Juego implements SujetoObservable {
             //    if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha()){
         //        eliminar.add   }
     }
-    }
-    public ArrayList<Celda> celdasEliminar(Celda celda){
-       eliminar.clear();
-       if(celda.getFicha().getColor()==ColorFicha.BLANCA){}
+    
+//     public ArrayList<Celda> celdasEliminar(Celda celda){
+//        eliminar.clear();
+//        if(celda.getFicha().getColor()==ColorFicha.BLANCA){}
 
-   }
+//    }
     
     public void seleccionarFicha(Celda celda) {
         ArrayList<Celda> contiguas = celdasContiguas(celda);
@@ -101,8 +101,9 @@ public class Juego implements SujetoObservable {
             notificarPintar(casilla);
         }
         notificarMover(celda);
-        String movimiento = "Hubo Mooving/n";
-        notificarHistorial(movimiento);
+        //String movimiento = "Hubo Mooving/n";
+        //notificarHistorial(movimiento);
         
     }
     
+}
