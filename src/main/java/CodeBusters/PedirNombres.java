@@ -1,25 +1,27 @@
+package codebusters;
+
 import java.awt.event.*;
 
 import javax.swing.*;
 
 public class PedirNombres extends JFrame implements ActionListener {
-    private static final long serialVersionUID = 1L;
+
     private JTextField cuadroTexto1, cuadroTexto2;
     private JButton aceptar;
     private JLabel jugador1, jugador2;
 
-    public static String nombre1, nombre2; //¿Por qué son 'static'?
+    public static String nombre1, nombre2;
 
     public PedirNombres() {
         setLayout(null);
         
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        jugador1 = new JLabel("Nombre Jugador 1:");
+        jugador1 = new JLabel("Nombre Blancas:");
         jugador1.setBounds(10,10,120,30);
         add(jugador1);
 
-        jugador2 = new JLabel("Nombre Jugador 2:");
+        jugador2 = new JLabel("Nombre Rojas:");
         jugador2.setBounds(10,42,120,30);
         add(jugador2);
 
@@ -37,13 +39,16 @@ public class PedirNombres extends JFrame implements ActionListener {
         add(aceptar);
     }
 
+    /*
+     *  @param  n1, n2: Nombres a comparar.
+     */
     public boolean chequearNombres(String n1, String n2) {
         if(n1.equals("") || n2.equals("") || n1.equals(n2)) return false;
         else return true;
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == aceptar) {
+        if(e.getSource()==aceptar) {
             nombre1 = cuadroTexto1.getText().trim();
             nombre2 = cuadroTexto2.getText().trim();
             
@@ -56,8 +61,11 @@ public class PedirNombres extends JFrame implements ActionListener {
                 tablero.setResizable(false);
 
                 this.setVisible(false);
+                Juego juego = new Juego(tablero);
 
                 Main.jugando = true;
+
+                tablero.setJuego(juego);
 
                 Estadisticas estadisticas = new Estadisticas();
                 

@@ -1,10 +1,12 @@
+package codebusters;
+
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
 public class ComoJugar extends JFrame implements ActionListener {
-    private static final long serialVersionUID = -6840333612628077763L;
+
     private JButton atras, adelante, volver;
     private JLabel imagenTutorial;
     private int numPagina = 0;
@@ -38,24 +40,24 @@ public class ComoJugar extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == atras) {
-            if(numPagina == 1) atras.setEnabled(false);
+        if(e.getSource()==atras) {
+            if(numPagina==1) atras.setEnabled(false);
             else adelante.setEnabled(true);
             
             numPagina--;
             
             imagenTutorial.setText("Pagina " + numPagina);
         }
-        if(e.getSource() == adelante) {
-            if(numPagina == 9) adelante.setEnabled(false);
+        if(e.getSource()==adelante) {
+            if(numPagina==9) adelante.setEnabled(false);
             else atras.setEnabled(true);
             
             numPagina++;
             
             imagenTutorial.setText("Pagina "+numPagina);
         }
-        if(e.getSource() == volver) {
-            if(Main.jugando == false) {
+        if(e.getSource()==volver) {
+            if(Main.jugando==false) {
                 MenuPrincipal menu = new MenuPrincipal();
                 
                 menu.setBounds(0,0,300,600);

@@ -1,10 +1,12 @@
+package codebusters;
+
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
 public class MenuPrincipal extends JFrame implements ActionListener {
-    private static final long serialVersionUID = 1L;
+
     private JButton nueva_partida, como_jugar, salir;
     private JLabel titulo, marca;
     private ComoJugar tutorial;
@@ -56,14 +58,11 @@ public class MenuPrincipal extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == salir) System.exit(0);
-
-        if(e.getSource() == como_jugar) {
+        if(e.getSource()==salir) System.exit(0);
+        else if(e.getSource()==como_jugar) {
             tutorial.setVisible(true);
             this.setVisible(false);
-        }
-
-        if(e.getSource() == nueva_partida) {
+        } else if(e.getSource()==nueva_partida) {
             pedirNombres.setVisible(true);
             this.setVisible(false);
         }
