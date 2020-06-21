@@ -7,4 +7,5 @@ public interface SujetoObservable {
      */
     public void notificarPintar(Celda celda);
     public void notificarMover(Celda celda);
+    public void notificarHistorial(String movimiento);
 }

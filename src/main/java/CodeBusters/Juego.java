@@ -9,6 +9,7 @@ public class Juego implements SujetoObservable {
     Estadisticas estadisticas;
     Tablero tablero;
     ArrayList<Celda> adyacentes;
+    ArrayList<Celda> eliminar;
     int fichasJ1,fichasJ2;
     ArrayList<Observador> observadores;
     Celda celdaSeleccionada;
@@ -16,8 +17,9 @@ public class Juego implements SujetoObservable {
     /*
      *  @param: tablero: Tablero asignado al juego.
      */
-    public Juego(Tablero tablero) {
+    public Juego(Tablero tablero,Estadisticas estadisticas) {
         this.tablero = tablero;
+        this.estadisticas = estadisticas;
         adyacentes = new ArrayList<Celda>();
     }
 
@@ -41,7 +43,10 @@ public class Juego implements SujetoObservable {
     public void notificarMover(Celda destino){
         tablero.updateMover(celdaSeleccionada, destino);
     }
-
+    @Override
+    public void notificarHistorial(String movimiento){
+        estadisticas.updateHistorial(movimiento);
+    }
     /*
     */
     public ArrayList<Celda> celdasContiguas(Celda celda) {
@@ -55,24 +60,30 @@ public class Juego implements SujetoObservable {
             if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) {
                 adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
             }
+            
             return adyacentes;
-        }
-        else {
+            
+        } else {
             if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha()) {
                 adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1]);
             }
-
+    
             if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha()) {
                 adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1]);
             }
-
-     //       for(Celda casilla : adyacentes) {
-    //            System.out.println(casilla.getFila() + "," + casilla.getColumna());
-   //         }
-
+            
             return adyacentes;
         }
+     
+            //    if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha()){
+        //        eliminar.add   }
     }
+    }
+    public ArrayList<Celda> celdasEliminar(Celda celda){
+       eliminar.clear();
+       if(celda.getFicha().getColor()==ColorFicha.BLANCA){}
+
+   }
     
     public void seleccionarFicha(Celda celda) {
         ArrayList<Celda> contiguas = celdasContiguas(celda);
@@ -90,5 +101,8 @@ public class Juego implements SujetoObservable {
             notificarPintar(casilla);
         }
         notificarMover(celda);
+        String movimiento = "Hubo Mooving/n";
+        notificarHistorial(movimiento);
+        
     }
-}
+    

@@ -37,6 +37,7 @@ public class Estadisticas extends JFrame implements ActionListener {
         add(tituloHistorial);
 
         historial = new JTextArea();
+        historial.setEditable(false);
         scrollPane = new JScrollPane(historial);
         scrollPane.setBounds(10,200,266,400);
         add(scrollPane);
@@ -53,5 +54,11 @@ public class Estadisticas extends JFrame implements ActionListener {
     public void addMovimiento(){
         cantidadMovimientos++;
     }
+    @Override
+    public void updateHistorial(String movimiento){
+        historial.setText(movimiento);
+
+    }
+
 
 }
