@@ -1,5 +1,3 @@
-package codebusters;
-
 public abstract class ComportamientoFicha {
     private Algoritmo comportamiento;
 
