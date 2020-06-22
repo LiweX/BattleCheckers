@@ -4,9 +4,6 @@
  *          Bonino, Francisco Ignacio
  * @since   22/06/2020
  */
-
-package codebusters;
-
 import java.awt.*;
 import java.awt.event.*;
 
