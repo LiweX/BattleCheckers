@@ -3,8 +3,6 @@
  *          Merino, Mateo
  *          Bonino, Francisco Ignacio
  */
-package codebusters;
-
 import java.awt.*;
 import java.awt.event.*;
 
