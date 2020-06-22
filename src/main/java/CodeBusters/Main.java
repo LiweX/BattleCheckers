@@ -1,7 +1,12 @@
+/**
+ * @author  Luna, Lihué Leandro
+ *          Merino, Mateo
+ *          Bonino, Francisco Ignacio
+ */
+
 package codebusters;
 
 public class Main {
-    
     MenuPrincipal menu;
     ComoJugar tutorial;
     

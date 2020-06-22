@@ -1,11 +1,10 @@
 package codebusters;
 
 import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.*;
 
-public class Estadisticas extends JFrame implements Observador {
+public class Estadisticas extends JFrame implements ObservadorEstadisticas {
 
     private JLabel jugador1, jugador2, piezasComidas, tituloHistorial,comidasJ1,comidasJ2;
     private JScrollPane scrollPane;

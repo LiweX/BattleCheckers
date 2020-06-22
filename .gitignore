@@ -12,3 +12,9 @@ target/classes/codebusters/PedirNombres.class
 target/classes/codebusters/SujetoObservable.class
 target/classes/codebusters/Tablero.class
 target/test-classes/codebusters/BCTest.class
+target/classes/codebusters/ObservadorTablero.class
+target/classes/codebusters/ObservadorEstadisticas.class
+target/classes/codebusters/FichaRey.class
+target/classes/codebusters/FichaPeon.class
+target/classes/codebusters/ComportamientoFicha.class
+target/classes/codebusters/Algoritmo.class

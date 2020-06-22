@@ -1,3 +1,21 @@
+/**
+ * @author  Luna, Lihué Leandro
+ *          Merino, Mateo
+ *          Bonino, Francisco Ignacio
+ */
+
+/**
+ * @author  Luna, Lihué Leandro
+ *          Merino, Mateo
+ *          Bonino, Francisco Ignacio
+ */
+
+/**
+ * @author  Luna, Lihué Leandro
+ *          Merino, Mateo
+ *          Bonino, Francisco Ignacio
+ */
+
 package codebusters;
 
 import java.awt.*;
@@ -5,7 +23,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class Tablero extends JFrame implements ActionListener,Observador {
+public class Tablero extends JFrame implements ActionListener,ObservadorTablero {
 
     private JMenuBar menubar;
     private JMenu juego, ayuda;

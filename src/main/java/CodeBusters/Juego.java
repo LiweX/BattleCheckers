@@ -1,3 +1,9 @@
+/**
+ * @author  Luna, Lihué Leandro
+ *          Merino, Mateo
+ *          Bonino, Francisco Ignacio
+ */
+
 package codebusters;
 
 import java.util.ArrayList;
@@ -11,10 +17,13 @@ public class Juego implements SujetoObservable {
     ArrayList<Celda> adyacentes;
     ArrayList<Celda> eliminar;
     int fichasJ1,fichasJ2;
-    ArrayList<Observador> observadores;
     Celda celdaSeleccionada;
-
-    public Juego(Tablero tablero,Estadisticas estadisticas) {
+    
+    /**
+     * @param   tablero: Tablero de juego a asociar.
+     * @param   estadisticas: Estadísticas del juego.
+     */
+    public Juego(Tablero tablero, Estadisticas estadisticas) {
         this.tablero = tablero;
         this.estadisticas = estadisticas;
         adyacentes = new ArrayList<Celda>();
@@ -24,13 +33,8 @@ public class Juego implements SujetoObservable {
     }
 
     //Setters
-    /**
-     *  @param  o: Observador a agregar.
-     */
-    public void addObserver(Observador o) {
-        observadores.add(o);
-    }
-
+  
+    //Overrides
     /**
      *  @param celda: Celda que debe ser pintada.
      */
@@ -38,6 +42,7 @@ public class Juego implements SujetoObservable {
     public void notificarPintarMover(Celda celda) {
         tablero.updatePintarMover(celda);
     }
+
     @Override
     public void notificarPintarComer(Celda celda) {
         tablero.updatePintarComer(celda);
@@ -63,6 +68,10 @@ public class Juego implements SujetoObservable {
         estadisticas.updateComidas(fichas1,fichas2);
     }
     
+    /**
+     * @param   celda: Celda que se toma como referencia para obtener sus celdas contiguas según el color de la ficha que tenga.
+     * @return  adyacentes: Lista de celdas contiguas.
+     */
     public ArrayList<Celda> celdasContiguas(Celda celda) {
         adyacentes.clear();
 
@@ -111,6 +120,10 @@ public class Juego implements SujetoObservable {
         }
     }
     
+    /**
+     * @param   celda: Celda que se toma como referencia para obtener las celdas posibles donde podemos movernos para comer una pieza enemiga.
+     * @return  eliminar: Lista de celdas para moverse y comer pieza enemiga.
+     */
     public ArrayList<Celda> celdasEliminar(Celda celda) {
         eliminar.clear();
 
@@ -159,11 +172,14 @@ public class Juego implements SujetoObservable {
         }
     }
     
+    /**
+     * @param   celda: Celda seleccionada. Se pintarán las casillas para moverse o comer desde esta celda.
+     */
     public void seleccionarFicha(Celda celda) {
         ArrayList<Celda> contiguas = celdasContiguas(celda);
         ArrayList<Celda> eliminaciones = celdasEliminar(celda);
 
-        if(celda.equals(celdaSeleccionada)) {        //despintar para deseleccionar
+        if(celda.equals(celdaSeleccionada)) {        //Despintar y deseleccionar.
             for(Celda casilla : contiguas)
                 notificarPintarMover(casilla);
                 
@@ -192,6 +208,9 @@ public class Juego implements SujetoObservable {
         }
     }
 
+    /**
+     * @param   celda: Celda donde está la ficha que queremos mover.
+     */
     public void moverFicha(Celda celda) {
         for(Celda casilla : adyacentes)
             notificarPintarMover(casilla);
@@ -206,6 +225,9 @@ public class Juego implements SujetoObservable {
         notificarHistorial(movimiento);
     }
 
+    /**
+     * @param   celda: Celda donde está la ficha que quiere moverse y comer una ficha enemiga.
+     */
     public void comerFicha(Celda celda) {
         for(Celda casilla : eliminar)
             notificarPintarComer(casilla);
@@ -224,10 +246,17 @@ public class Juego implements SujetoObservable {
         notificarComidas(fichasJ1,fichasJ2);
     }
 
+    //Getters
+    /**
+     * @return  celdaSeleccionada: Celda seleccionada en el click anterior.
+     */
     public Celda getCeldaAnterior() {
         return celdaSeleccionada;
     }
 
+    /**
+     * @return estadisticas: Objeto estadísticas del juego.
+     */
     public Estadisticas getEstadisticas() {
         return estadisticas;
     }
