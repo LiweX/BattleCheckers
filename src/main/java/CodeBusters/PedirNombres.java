@@ -56,17 +56,17 @@ public class PedirNombres extends JFrame implements ActionListener {
             else {
                 Tablero tablero = new Tablero();
                 
-                tablero.setBounds(0,0,656,702);
+                tablero.setBounds(0,0,646,692);
                 tablero.setVisible(true);
                 tablero.setResizable(false);
 
-                this.setVisible(false);
                 Estadisticas estadisticas = new Estadisticas();
                 
                 estadisticas.setBounds(650,0,300,650);
                 estadisticas.setVisible(true);
                 estadisticas.setResizable(false);
-
+                
+                this.setVisible(false);
                 Main.jugando = true;
                 Juego juego = new Juego(tablero,estadisticas);
                 tablero.setJuego(juego);

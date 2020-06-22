@@ -166,7 +166,7 @@ public class Tablero extends JFrame implements ActionListener,Observador {
     public void updatePintarMover(Celda celda) {
         if(celda.getBackground().equals(green)) {
             celda.setBackground(black);
-           // toggleMoviendo();
+          
         }
         else celda.setBackground(green);
     }
@@ -175,7 +175,7 @@ public class Tablero extends JFrame implements ActionListener,Observador {
     public void updatePintarComer(Celda celda) {
         if(celda.getBackground().equals(red)) {
             celda.setBackground(black);
-           // toggleMoviendo();
+           
         }
         else celda.setBackground(red);
     }
