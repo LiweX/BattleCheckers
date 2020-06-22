@@ -1,5 +1,3 @@
-package codebusters;
-
 import java.awt.event.*;
 
 import javax.swing.*;
