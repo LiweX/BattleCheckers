@@ -1,15 +1,18 @@
 import javax.swing.JButton;
 
-public class Celda extends JButton {
+public class Celda extends JButton{
 
     private boolean hayFicha;
     private int fila, columna;
     private Ficha ficha;
     
-    /*
-     *  @param  x, y: Coordenadas de la celda.
-     *          hayFicha: Estado inicial de ocupación de la celda.
+    /**
+     * @param   x,y:    Coordenadas de la celda en el tablero.  
+     * @param   hayFicha:   Indica si hay una ficha o no en la celda.
+     * @param   ficha:  Ficha que hay en la celda ('null' si no hay).
      */
+    public Celda(){}
+    
     public Celda(int x, int y, boolean hayFicha, Ficha ficha) {
         super();
         
@@ -30,15 +33,15 @@ public class Celda extends JButton {
     }
 
     //Setters
-    /*
-     *  @param  hayFicha: Indica si hay ficha en la celda.
+    /**
+     *  @param  hayFicha:   Indica si hay ficha en la celda.
      */
     public void hayFicha(boolean hayFicha) {
         this.hayFicha = hayFicha;
     }
 
-    /*
-     *  @param  ficha: Ficha a setear en esta celda.
+    /**
+     *  @param  ficha:  Ficha a setear en esta celda.
      */
     public void setFicha(Ficha ficha) {
         this.ficha = ficha;

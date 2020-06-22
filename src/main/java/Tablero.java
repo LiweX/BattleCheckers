@@ -14,7 +14,7 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     private JMenu juego, ayuda;
     private JMenuItem nuevaPartida, salir, acercaDe, comoJugar;
     private Color black,red,green;
-    private ImageIcon fichaRoja, fichaBlanca, vacio;
+    private ImageIcon fichaRoja, fichaRojaRey, fichaBlanca, fichaBlancaRey, vacio;
     private boolean porMover = false;
     private boolean turnoBlancas = true;
     private Celda[][] celdas = new Celda[8][8];
@@ -29,6 +29,8 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
 
         fichaRoja = new ImageIcon(getClass().getResource("fichaRoja.png"));
         fichaBlanca = new ImageIcon(getClass().getResource("fichaBlanca.png"));
+        fichaRojaRey = new ImageIcon(getClass().getResource("fichaRojaRey.png"));
+        fichaBlancaRey = new ImageIcon(getClass().getResource("fichaBlancaRey.png"));
         vacio = new ImageIcon();
         
     	setLayout(null);
@@ -191,6 +193,14 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         origen.setIcon(vacio);
         origen.hayFicha(false);
         origen.setFicha(null);
+
+        if(destino.getFicha().getColor()==ColorFicha.BLANCA && destino.getFila()==7) {
+            destino.getFicha().setComportamiento(new FichaRey());
+            destino.setIcon(fichaBlancaRey);
+        } else if(destino.getFicha().getColor()==ColorFicha.ROJA && destino.getFila()==0) {
+            destino.getFicha().setComportamiento(new FichaRey());
+            destino.setIcon(fichaRojaRey);
+        }
     }
 
     @Override
