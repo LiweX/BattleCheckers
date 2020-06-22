@@ -5,8 +5,8 @@ public class Jugador {
     private String nombre;
     private int fichasVivas, fichasComidas;
 
-    /*
-        @param  nombre: Nombre del jugador.
+    /**
+     *  @param  nombre: Nombre del jugador.
     */
     public Jugador(String nombre) {
         this.nombre = nombre;

@@ -10,4 +10,5 @@ public interface SujetoObservable {
     public void notificarMover(Celda celda);
     public void notificarComer(Celda celda);
     public void notificarHistorial(String movimiento);
+    public void notificarComidas(int fichasJ1,int fichasJ2);
 }

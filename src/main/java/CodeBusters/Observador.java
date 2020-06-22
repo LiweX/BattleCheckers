@@ -10,4 +10,5 @@ public interface Observador {
     public void updateMover(Celda origen,Celda destino);
     public void updateComer(Celda origen, Celda destino);
     public void updateHistorial(String movimiento);
+    public void updateComidas(int fichasJ1, int fichasJ2);
 }

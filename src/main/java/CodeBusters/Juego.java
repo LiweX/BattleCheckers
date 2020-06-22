@@ -19,6 +19,8 @@ public class Juego implements SujetoObservable {
         this.estadisticas = estadisticas;
         adyacentes = new ArrayList<Celda>();
         eliminar = new ArrayList<Celda>();
+        fichasJ1 = 0;
+        fichasJ2 = 0;
     }
 
     //Setters
@@ -55,6 +57,11 @@ public class Juego implements SujetoObservable {
     public void notificarHistorial(String movimiento) {
         estadisticas.updateHistorial(movimiento);
     }
+
+    @Override
+    public void notificarComidas(int fichas1, int fichas2) {
+        estadisticas.updateComidas(fichas1,fichas2);
+    }
     
     public ArrayList<Celda> celdasContiguas(Celda celda) {
         adyacentes.clear();
@@ -78,7 +85,6 @@ public class Juego implements SujetoObservable {
                 if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente abajo a la derecha.
                     adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
                 }
-                
                 return adyacentes;
             }
         } else {
@@ -109,43 +115,43 @@ public class Juego implements SujetoObservable {
         eliminar.clear();
 
         if(celda.getFicha().getColor()==ColorFicha.BLANCA) {
-            if(celda.getColumna()==0) {
-                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha()) {
+            if(celda.getColumna()==0 || celda.getColumna()==1) {
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.BLANCA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2]);                                   //Primero: Me fijo si border mode (Columna 0)
                 }
                 return eliminar;
-            } else if(celda.getColumna()==7) {
-                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha()) {
+            } else if(celda.getColumna()==7 || celda.getColumna()==6) {
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.BLANCA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2]);                                   //Segundo: Me fijo si border mode (Columna 7)
                 }
                 return eliminar;
             } else {
-                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha()) {
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.BLANCA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2]);
                 }
                             
-                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha()) {
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.BLANCA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2]);
                 }
                 return eliminar;
             }
         } else {
-            if(celda.getColumna()==0) {
-                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2].hayFicha()) {
+            if(celda.getColumna()==0 || celda.getColumna()==1) {
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.ROJA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2]);                                 //Primero: Me fijo si border mode (Columna 0)
                 }
                 return eliminar;
-            } else if(celda.getColumna()==7) {
-                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2].hayFicha()) {
+            } else if(celda.getColumna()==7 || celda.getColumna()==6) {
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.ROJA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2]);                                 //Segundo: Me fijo si border mode (Columna 7)
                 }
                 return eliminar;
             } else {
-                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2].hayFicha()) {
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.ROJA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2]);
                 }
     
-                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2].hayFicha()) {
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.ROJA) {
                     eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2]);
                 }
                 return eliminar;
@@ -156,19 +162,23 @@ public class Juego implements SujetoObservable {
     public void seleccionarFicha(Celda celda) {
         ArrayList<Celda> contiguas = celdasContiguas(celda);
         ArrayList<Celda> eliminaciones = celdasEliminar(celda);
-        
-        if(celda.equals(celdaSeleccionada)) {
+
+        if(celda.equals(celdaSeleccionada)) {        //despintar para deseleccionar
             for(Celda casilla : contiguas)
                 notificarPintarMover(casilla);
                 
             for(Celda casilla : eliminaciones)
                 notificarPintarComer(casilla);
+            
+            tablero.toggleMoviendo();
+
+            celdaSeleccionada = null;
         } else {
             celdaSeleccionada = celda;
 
-            if(contiguas.isEmpty() && eliminaciones.isEmpty()) {
+            if(!contiguas.isEmpty() || !eliminaciones.isEmpty()) { //Si hay casillas para mover o comer, pongo porMover en true y pinto las celdas.
                 tablero.toggleMoviendo();
-            } else {
+
                 if(!contiguas.isEmpty()) {
                     for(Celda casilla : contiguas)
                         notificarPintarMover(casilla);
@@ -202,8 +212,16 @@ public class Juego implements SujetoObservable {
 
         for(Celda casilla : adyacentes)
             notificarPintarMover(casilla);
-        
+  
         notificarComer(celda);
+
+        if(tablero.getTurno()) {
+            fichasJ2++;
+        } else {
+            fichasJ1++;
+        }
+
+        notificarComidas(fichasJ1,fichasJ2);
     }
 
     public Celda getCeldaAnterior() {

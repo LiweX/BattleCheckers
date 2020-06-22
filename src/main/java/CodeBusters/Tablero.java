@@ -127,10 +127,9 @@ public class Tablero extends JFrame implements ActionListener,Observador {
                         if(celdas[i][j].hayFicha()) {
                             if((turnoBlancas && celdas[i][j].getFicha().getColor()==ColorFicha.BLANCA) || (!turnoBlancas && celdas[i][j].getFicha().getColor()==ColorFicha.ROJA)) {
                                 if((porMover && game.getCeldaAnterior().equals(celdas[i][j]))) {
-                                    toggleMoviendo();
                                     game.seleccionarFicha(celdas[i][j]);
                                 } else if(celdas[i][j].hayFicha() && !porMover) {
-                                    toggleMoviendo();
+                                    //toggleMoviendo();
                                     game.seleccionarFicha(celdas[i][j]);
                                 }
                             } else {
@@ -165,13 +164,19 @@ public class Tablero extends JFrame implements ActionListener,Observador {
      */
     @Override
     public void updatePintarMover(Celda celda) {
-        if(celda.getBackground().equals(green)) celda.setBackground(black);
+        if(celda.getBackground().equals(green)) {
+            celda.setBackground(black);
+           // toggleMoviendo();
+        }
         else celda.setBackground(green);
     }
     
     @Override
     public void updatePintarComer(Celda celda) {
-        if(celda.getBackground().equals(red)) celda.setBackground(black);
+        if(celda.getBackground().equals(red)) {
+            celda.setBackground(black);
+           // toggleMoviendo();
+        }
         else celda.setBackground(red);
     }
 
@@ -231,6 +236,10 @@ public class Tablero extends JFrame implements ActionListener,Observador {
         else porMover = true;
     }
 
+    public boolean getMoviendo() {
+        return porMover;
+    }
+
     public void toggleTurno() {
         if(turnoBlancas) turnoBlancas = false;
         else turnoBlancas = true;
@@ -238,5 +247,9 @@ public class Tablero extends JFrame implements ActionListener,Observador {
 
     public void setJuego(Juego juego) {
         game = juego;
+    }
+
+    public boolean getTurno() {
+        return turnoBlancas;
     }
 }
