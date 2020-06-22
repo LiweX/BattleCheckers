@@ -1,5 +1,3 @@
-package codebusters;
-
 import java.util.ArrayList;
 
 public class FichaRey implements Algoritmo {
