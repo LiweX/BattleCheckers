@@ -50,25 +50,48 @@ public class Juego implements SujetoObservable {
         adyacentes.clear();
 
         if(celda.getFicha().getColor()==ColorFicha.BLANCA) {
-            if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha()) {  //Corroboración celda adyacente abajo a la izquierda.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1]);
-            }
-
-            if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente abajo a la derecha.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
-            }
-            
-            return adyacentes;
-        } else {
-            if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha()) { //Corroboración celda adyacente arriba a la izquierda.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1]);
-            }
+            if(celda.getColumna()==0) {
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) {  //Primero: Me fijo si estoy en el borde izquierdo (Columna 0)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
+                }
+                return adyacentes;
+            } else if(celda.getColumna()==7) {
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha()) {  //Segundo: Me fijo si estoy en el borde derecho (Columna 7)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1]);
+                }
+                return adyacentes;
+            } else {
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha()) {  //Corroboración celda adyacente abajo a la izquierda.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1]);
+                }
     
-            if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente arriba a la derecha.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1]);
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente abajo a la derecha.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
+                }
+                
+                return adyacentes;
             }
-            
-            return adyacentes;
+        } else {
+            if(celda.getColumna()==0) {
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha()) {  //Primero: Me fijo si estoy en el borde izquierdo (Columna 0)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1]);
+                }
+                return adyacentes;
+            } else if(celda.getColumna()==7) {
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha()) {  //Segundo: Me fijo si estoy en el borde derecho (Columna 7)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1]);
+                }
+                return adyacentes;
+            } else {
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha()) {  //Corroboración celda adyacente abajo a la izquierda.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1]);
+                }
+    
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente abajo a la derecha.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1]);
+                }
+                return adyacentes;
+            }
         }
     }
     
