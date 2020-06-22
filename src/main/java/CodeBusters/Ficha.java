@@ -1,3 +1,9 @@
+/**
+ * @author  Luna, Lihué Leandro
+ * @author  Merino, Mateo
+ * @author  Bonino, Francisco Ignacio
+ */
+
 import javax.swing.ImageIcon;
 
 public class Ficha extends ComportamientoFicha {
@@ -7,7 +13,8 @@ public class Ficha extends ComportamientoFicha {
     private ImageIcon icono;
    
     /**
-     *  @param  coordenada: Coordenada inicial de la ficha.
+     * @param   color   Color de la ficha.
+     * @param   icono   Imagen representativa de la ficha.
      */
     public Ficha(ColorFicha color, ImageIcon icono) {
         setRey(false);                  //Toda ficha comienza siendo peón.
@@ -18,7 +25,7 @@ public class Ficha extends ComportamientoFicha {
 
     //Setters
     /**
-     * @param  esRey: Indica si la ficha es rey o peón.
+     * @param   esRey    Indica si la ficha es rey o peón.
      */
     public void setRey(boolean esRey) {
         this.esRey = esRey;

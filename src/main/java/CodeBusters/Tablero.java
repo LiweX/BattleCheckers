@@ -1,8 +1,9 @@
 /**
- * @author  Luna, Lihué Leandro
- *          Merino, Mateo
- *          Bonino, Francisco Ignacio
+ * @author  Luna, Lihué Leandro.
+ * @author  Merino, Mateo.
+ * @author  Bonino, Francisco Ignacio.
  */
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -100,6 +101,9 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         }
     }
     
+    /**
+     * @param   e   Evento de 'click' en algún botón del tablero.
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==nuevaPartida) {
             PedirNombres pedirNombres = new PedirNombres();
@@ -160,12 +164,15 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     }
 
     //Getters
+    /**
+     * @return  Matriz de casillas del tablero.
+     */
     public Celda[][] getCeldas() {
         return celdas;
     }
 
     /**
-     *  @param  celda: Celda a pintar.
+     *  @param  celda   Celda a pintar.
      */
     @Override
     public void updatePintarMover(Celda celda) {
@@ -176,15 +183,19 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         else celda.setBackground(green);
     }
     
+    /**
+     * @param   celda   Celda a pintar.
+     */
     @Override
     public void updatePintarComer(Celda celda) {
-        if(celda.getBackground().equals(red)) {
-            celda.setBackground(black);
-           
-        }
+        if(celda.getBackground().equals(red)) celda.setBackground(black);
         else celda.setBackground(red);
     }
 
+    /**
+     * @param   origen  Celda origen del movimiento.
+     * @param   destino Celda destino del movimiento.
+     */
     @Override
     public void updateMover(Celda origen, Celda destino) {
         destino.setIcon(origen.getIcon());
@@ -203,6 +214,10 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         }
     }
 
+    /**
+     * @param   origen  Celda origen cuya ficha va a moverse y comer.
+     * @param   destino Celda destino donde la ficha que se mueve y come va a llegar.
+     */
     @Override
     public void updateComer(Celda origen, Celda destino) {
         if(origen.getFicha().getColor()==ColorFicha.BLANCA) {
@@ -241,14 +256,14 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     }
 
     //Setters
-    /**
-     *  @param  porMover: Indica si se está por efectuar un movimiento o no.
-     */
     public void toggleMoviendo() {
         if(porMover) porMover = false;
         else porMover = true;
     }
 
+    /**
+     * @return  Si voy a mover o no.
+     */
     public boolean getMoviendo() {
         return porMover;
     }
@@ -262,6 +277,9 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         game = juego;
     }
 
+    /**
+     * @return  Turno del jugador.
+     */
     public boolean getTurno() {
         return turnoBlancas;
     }
