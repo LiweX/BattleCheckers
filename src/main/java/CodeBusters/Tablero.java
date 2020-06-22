@@ -3,19 +3,6 @@
  *          Merino, Mateo
  *          Bonino, Francisco Ignacio
  */
-
-/**
- * @author  Luna, Lihué Leandro
- *          Merino, Mateo
- *          Bonino, Francisco Ignacio
- */
-
-/**
- * @author  Luna, Lihué Leandro
- *          Merino, Mateo
- *          Bonino, Francisco Ignacio
- */
-
 package codebusters;
 
 import java.awt.*;
