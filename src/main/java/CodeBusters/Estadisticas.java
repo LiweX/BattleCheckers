@@ -5,16 +5,25 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class Estadisticas extends JFrame implements ActionListener,Observador {
+public class Estadisticas extends JFrame implements Observador {
 
-    private JLabel jugador1, jugador2, piezasComidas, tituloHistorial;
+    private JLabel jugador1, jugador2, piezasComidas, tituloHistorial,comidasJ1,comidasJ2;
     private JScrollPane scrollPane;
     private JTextArea historial;
-    private int cantidadMovimientos;
-    private int cantidadEliminaciones;
+    private int cantidadMovimientos, cantidadEliminaciones;
 
     public Estadisticas() {
         setLayout(null);
+
+        comidasJ1 = new JLabel("0");
+        comidasJ1.setFont(new Font("Arial",3,16));
+        comidasJ1.setBounds(50,85,200,20);
+        add(comidasJ1);
+
+        comidasJ2 = new JLabel("0");
+        comidasJ2.setFont(new Font("Arial",3,16));
+        comidasJ2.setBounds(50,135,200,20);
+        add(comidasJ2);
 
         piezasComidas = new JLabel("Piezas comidas");
         piezasComidas.setFont(new Font("Arial",3,18));
@@ -22,12 +31,12 @@ public class Estadisticas extends JFrame implements ActionListener,Observador {
         add(piezasComidas);
 
         jugador1 = new JLabel(PedirNombres.nombre1 + ":");
-        jugador1.setFont(new Font("Arial",3,15));
+        jugador1.setFont(new Font("Arial",3,18));
         jugador1.setBounds(25,60,200,20);
         add(jugador1);
 
         jugador2 = new JLabel(PedirNombres.nombre2 + ":");
-        jugador2.setFont(new Font("Arial",3,15));
+        jugador2.setFont(new Font("Arial",3,18));
         jugador2.setBounds(25,110,200,20);
         add(jugador2);
 
@@ -45,20 +54,28 @@ public class Estadisticas extends JFrame implements ActionListener,Observador {
         add(scrollPane);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        //TODO
-    }
-
-    public void addEliminacion(){
+    public void addEliminacion() {
         cantidadEliminaciones++;
     }
 
-    public void addMovimiento(){
+    public void addMovimiento() {
         cantidadMovimientos++;
     }
 
     @Override
-    public void updateHistorial(String movimiento){
+    public void updateHistorial(String movimiento) {
         historial.append(movimiento);
+    }
+
+    @Override
+    public void updateComidas(int fichasJ1, int fichasJ2) {
+        comidasJ1.setText(Integer.toString(fichasJ2));
+        comidasJ2.setText(Integer.toString(fichasJ1));
+
+        if(fichasJ1==12) {
+            JOptionPane.showMessageDialog(null,"Ganó el jugador de las fichas ROJAS!");
+        } else if(fichasJ2==12) {
+            JOptionPane.showMessageDialog(null,"Ganó el jugador de las fichas BLANCAS!");
+        }
     }
 }

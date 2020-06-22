@@ -18,6 +18,9 @@ public class Juego implements SujetoObservable {
         this.tablero = tablero;
         this.estadisticas = estadisticas;
         adyacentes = new ArrayList<Celda>();
+        eliminar = new ArrayList<Celda>();
+        fichasJ1 = 0;
+        fichasJ2 = 0;
     }
 
     //Setters
@@ -32,102 +35,169 @@ public class Juego implements SujetoObservable {
      *  @param celda: Celda que debe ser pintada.
      */
     @Override
-    public void notificarPintar(Celda celda) {
-        tablero.updatePintar(celda);
+    public void notificarPintarMover(Celda celda) {
+        tablero.updatePintarMover(celda);
+    }
+    @Override
+    public void notificarPintarComer(Celda celda) {
+        tablero.updatePintarComer(celda);
     }
 
     @Override
-    public void notificarMover(Celda destino){
+    public void notificarMover(Celda destino) {
         tablero.updateMover(celdaSeleccionada, destino);
     }
 
     @Override
-    public void notificarHistorial(String movimiento){
+    public void notificarComer(Celda destino) {
+        tablero.updateComer(celdaSeleccionada, destino);
+    }
+
+    @Override
+    public void notificarHistorial(String movimiento) {
         estadisticas.updateHistorial(movimiento);
+    }
+
+    @Override
+    public void notificarComidas(int fichas1, int fichas2) {
+        estadisticas.updateComidas(fichas1,fichas2);
     }
     
     public ArrayList<Celda> celdasContiguas(Celda celda) {
         adyacentes.clear();
 
         if(celda.getFicha().getColor()==ColorFicha.BLANCA) {
-            if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha()) {  //Corroboración celda adyacente abajo a la izquierda.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1]);
-            }
-
-            if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente abajo a la derecha.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
-            }
-            
-            return adyacentes;
-        } else {
-            if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha()) { //Corroboración celda adyacente arriba a la izquierda.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1]);
-            }
+            if(celda.getColumna()==0) {
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) {  //Primero: Me fijo si estoy en el borde izquierdo (Columna 0)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
+                }
+                return adyacentes;
+            } else if(celda.getColumna()==7) {
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha()) {  //Segundo: Me fijo si estoy en el borde derecho (Columna 7)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1]);
+                }
+                return adyacentes;
+            } else {
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha()) {  //Corroboración celda adyacente abajo a la izquierda.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1]);
+                }
     
-            if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente arriba a la derecha.
-                adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1]);
+                if(!tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente abajo a la derecha.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1]);
+                }
+                return adyacentes;
             }
-            
-            return adyacentes;
+        } else {
+            if(celda.getColumna()==0) {
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha()) {  //Primero: Me fijo si estoy en el borde izquierdo (Columna 0)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1]);
+                }
+                return adyacentes;
+            } else if(celda.getColumna()==7) {
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha()) {  //Segundo: Me fijo si estoy en el borde derecho (Columna 7)
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1]);
+                }
+                return adyacentes;
+            } else {
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha()) {  //Corroboración celda adyacente abajo a la izquierda.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1]);
+                }
+    
+                if(!tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha()) { //Corroboración celda adyacente abajo a la derecha.
+                    adyacentes.add(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1]);
+                }
+                return adyacentes;
+            }
         }
     }
     
-    /*public ArrayList<Celda> celdasEliminar(Celda celda){
+    public ArrayList<Celda> celdasEliminar(Celda celda) {
         eliminar.clear();
 
         if(celda.getFicha().getColor()==ColorFicha.BLANCA) {
-            if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha()) {
-                eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2]);
+            if(celda.getColumna()==0 || celda.getColumna()==1) {
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.BLANCA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2]);                                   //Primero: Me fijo si border mode (Columna 0)
+                }
+                return eliminar;
+            } else if(celda.getColumna()==7 || celda.getColumna()==6) {
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.BLANCA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2]);                                   //Segundo: Me fijo si border mode (Columna 7)
+                }
+                return eliminar;
+            } else {
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.BLANCA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2]);
+                }
+                            
+                if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.BLANCA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2]);
+                }
+                return eliminar;
             }
-                        
-            if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha()) {
-                eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2]);
-            }
-
-            return eliminar;
         } else {
-            if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2].hayFicha()) {
-                eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()-2]);
-            }
-
-            if(tablero.getCeldas()[celda.getFila()+1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2].hayFicha()) {
-                eliminar.add(tablero.getCeldas()[celda.getFila()+2][celda.getColumna()+2]);
+            if(celda.getColumna()==0 || celda.getColumna()==1) {
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.ROJA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2]);                                 //Primero: Me fijo si border mode (Columna 0)
+                }
+                return eliminar;
+            } else if(celda.getColumna()==7 || celda.getColumna()==6) {
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.ROJA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2]);                                 //Segundo: Me fijo si border mode (Columna 7)
+                }
+                return eliminar;
+            } else {
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()-1].getFicha().getColor()!=ColorFicha.ROJA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()-2]);
+                }
+    
+                if(tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].hayFicha() && !tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2].hayFicha() && tablero.getCeldas()[celda.getFila()-1][celda.getColumna()+1].getFicha().getColor()!=ColorFicha.ROJA) {
+                    eliminar.add(tablero.getCeldas()[celda.getFila()-2][celda.getColumna()+2]);
+                }
+                return eliminar;
             }
         }
-        
-        return eliminar;
-    }*/
+    }
     
     public void seleccionarFicha(Celda celda) {
         ArrayList<Celda> contiguas = celdasContiguas(celda);
-        
-        if(celda==celdaSeleccionada) {
+        ArrayList<Celda> eliminaciones = celdasEliminar(celda);
+
+        if(celda.equals(celdaSeleccionada)) {        //despintar para deseleccionar
             for(Celda casilla : contiguas)
-                notificarPintar(casilla);
+                notificarPintarMover(casilla);
+                
+            for(Celda casilla : eliminaciones)
+                notificarPintarComer(casilla);
+            
+            tablero.toggleMoviendo();
+
+            celdaSeleccionada = null;
         } else {
-            
-            //ArrayList<Celda> eliminaciones = celdasEliminar(celda);
-            
             celdaSeleccionada = celda;
 
-            if(contiguas.isEmpty()) { //&& eliminaciones.isEmpty()
+            if(!contiguas.isEmpty() || !eliminaciones.isEmpty()) { //Si hay casillas para mover o comer, pongo porMover en true y pinto las celdas.
                 tablero.toggleMoviendo();
-            } else {
+
                 if(!contiguas.isEmpty()) {
                     for(Celda casilla : contiguas)
-                        notificarPintar(casilla);
+                        notificarPintarMover(casilla);
                 }
                 
-                /*if(!eliminaciones.isEmpty()) {
-                    //TODO comer
-                }*/
+                if(!eliminaciones.isEmpty()) {
+                    for(Celda casilla : eliminaciones)
+                        notificarPintarComer(casilla);
+                }
             }
         }
     }
 
     public void moverFicha(Celda celda) {
         for(Celda casilla : adyacentes)
-            notificarPintar(casilla);
+            notificarPintarMover(casilla);
+
+        for(Celda casilla : eliminar)
+            notificarPintarComer(casilla);
 
         notificarMover(celda);
 
@@ -136,7 +206,29 @@ public class Juego implements SujetoObservable {
         notificarHistorial(movimiento);
     }
 
+    public void comerFicha(Celda celda) {
+        for(Celda casilla : eliminar)
+            notificarPintarComer(casilla);
+
+        for(Celda casilla : adyacentes)
+            notificarPintarMover(casilla);
+  
+        notificarComer(celda);
+
+        if(tablero.getTurno()) {
+            fichasJ2++;
+        } else {
+            fichasJ1++;
+        }
+
+        notificarComidas(fichasJ1,fichasJ2);
+    }
+
     public Celda getCeldaAnterior() {
         return celdaSeleccionada;
+    }
+
+    public Estadisticas getEstadisticas() {
+        return estadisticas;
     }
 }
