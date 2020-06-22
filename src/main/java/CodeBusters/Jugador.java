@@ -1,5 +1,3 @@
-package codebusters;
-
 public class Jugador {
 
     private String nombre;
