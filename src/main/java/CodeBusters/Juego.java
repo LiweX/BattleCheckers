@@ -3,9 +3,6 @@
  *          Merino, Mateo
  *          Bonino, Francisco Ignacio
  */
-
-package codebusters;
-
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
