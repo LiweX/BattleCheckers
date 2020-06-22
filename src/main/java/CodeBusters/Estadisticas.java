@@ -4,10 +4,9 @@ import javax.swing.*;
 
 public class Estadisticas extends JFrame implements ObservadorEstadisticas {
 
-    private JLabel jugador1, jugador2, piezasComidas, tituloHistorial,comidasJ1,comidasJ2;
+    private JLabel jugador1, jugador2, piezasComidas, tituloHistorial, comidasJ1, comidasJ2;
     private JScrollPane scrollPane;
     private JTextArea historial;
-    private int cantidadMovimientos, cantidadEliminaciones;
 
     public Estadisticas() {
         setLayout(null);
@@ -51,14 +50,6 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
         add(scrollPane);
     }
 
-    public void addEliminacion() {
-        cantidadEliminaciones++;
-    }
-
-    public void addMovimiento() {
-        cantidadMovimientos++;
-    }
-
     @Override
     public void updateHistorial(String movimiento) {
         historial.append(movimiento);
@@ -74,5 +65,13 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
         } else if(fichasJ2==12) {
             JOptionPane.showMessageDialog(null,"Ganó el jugador de las fichas BLANCAS!");
         }
+    }
+
+    public String getNombreJugador1() {
+        return jugador1.getText();
+    }
+
+    public String getNombreJugador2() {
+        return jugador2.getText();
     }
 }

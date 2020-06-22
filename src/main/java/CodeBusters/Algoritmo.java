@@ -1,5 +1,7 @@
 /**
- * 
+ * @author  Luna, Lihué Leandro
+ * @author  Merino, Mateo
+ * @author  Bonino, Francisco Ignacio
  */
 
 import java.util.ArrayList;
