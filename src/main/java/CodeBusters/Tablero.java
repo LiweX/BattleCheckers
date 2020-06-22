@@ -10,7 +10,7 @@ public class Tablero extends JFrame implements ActionListener,Observador {
     private JMenuBar menubar;
     private JMenu juego, ayuda;
     private JMenuItem nuevaPartida, salir, acercaDe, comoJugar;
-    private Color black,red;
+    private Color black,red,green;
     private ImageIcon fichaRoja, fichaBlanca, vacio;
     private boolean porMover = false;
     private boolean turnoBlancas = true;
@@ -20,6 +20,7 @@ public class Tablero extends JFrame implements ActionListener,Observador {
     public Tablero() {
         black = new Color(0,0,0);
         red = new Color(255,0,0);
+        green = new Color(0,255,0);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -140,9 +141,13 @@ public class Tablero extends JFrame implements ActionListener,Observador {
                                 }
                             }
                         } else {
-                            if(porMover && celdas[i][j].getBackground()!=black) {
+                            if(porMover && celdas[i][j].getBackground()==green) {
                                 toggleMoviendo();
                                 game.moverFicha(celdas[i][j]);
+                                toggleTurno();
+                            } else if(porMover && celdas[i][j].getBackground()==red){
+                                toggleMoviendo();
+                                game.comerFicha(celdas[i][j]);
                                 toggleTurno();
                             }
                         }
@@ -159,13 +164,56 @@ public class Tablero extends JFrame implements ActionListener,Observador {
      *  @param  celda: Celda a pintar.
      */
     @Override
-    public void updatePintar(Celda celda) {
-        if(celda.getBackground().equals(black)) celda.setBackground(red);
-        else celda.setBackground(black);
+    public void updatePintarMover(Celda celda) {
+        if(celda.getBackground().equals(green)) celda.setBackground(black);
+        else celda.setBackground(green);
+    }
+    
+    @Override
+    public void updatePintarComer(Celda celda) {
+        if(celda.getBackground().equals(red)) celda.setBackground(black);
+        else celda.setBackground(red);
     }
 
     @Override
-    public void updateMover(Celda origen,Celda destino){
+    public void updateMover(Celda origen, Celda destino) {
+        destino.setIcon(origen.getIcon());
+        destino.hayFicha(true);
+        destino.setFicha(origen.getFicha());
+        origen.setIcon(vacio);
+        origen.hayFicha(false);
+        origen.setFicha(null);
+    }
+
+    @Override
+    public void updateComer(Celda origen, Celda destino) {
+        if(origen.getFicha().getColor()==ColorFicha.BLANCA) {
+            if(destino.getColumna()==origen.getColumna()+2) { //Ficha blanca que come abajo a la derecha
+                celdas[origen.getFila()+1][origen.getColumna()+1].setFicha(null);
+                celdas[origen.getFila()+1][origen.getColumna()+1].hayFicha(false);
+                celdas[origen.getFila()+1][origen.getColumna()+1].setIcon(vacio);
+
+                
+            } else {    //Ficha blanca que come abajo a la izquierda
+                celdas[origen.getFila()+1][origen.getColumna()-1].setFicha(null);
+                celdas[origen.getFila()+1][origen.getColumna()-1].hayFicha(false);
+                celdas[origen.getFila()+1][origen.getColumna()-1].setIcon(vacio);
+            }
+            
+        } else {
+            if(destino.getColumna()==origen.getColumna()+2) { //Ficha roja que come arriba a la derecha
+                celdas[origen.getFila()-1][origen.getColumna()+1].setFicha(null);
+                celdas[origen.getFila()-1][origen.getColumna()+1].hayFicha(false);
+                celdas[origen.getFila()-1][origen.getColumna()+1].setIcon(vacio);
+
+                
+            } else {    //Ficha roja que come arriba a la izquierda
+                celdas[origen.getFila()-1][origen.getColumna()-1].setFicha(null);
+                celdas[origen.getFila()-1][origen.getColumna()-1].hayFicha(false);
+                celdas[origen.getFila()-1][origen.getColumna()-1].setIcon(vacio);
+            }
+        }
+        
         destino.setIcon(origen.getIcon());
         destino.hayFicha(true);
         destino.setFicha(origen.getFicha());

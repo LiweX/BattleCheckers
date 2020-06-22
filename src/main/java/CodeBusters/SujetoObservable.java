@@ -5,7 +5,9 @@ public interface SujetoObservable {
     /*
      *  @param: celda: Celda a pintar.
      */
-    public void notificarPintar(Celda celda);
+    public void notificarPintarMover(Celda celda);
+    public void notificarPintarComer(Celda celda);
     public void notificarMover(Celda celda);
+    public void notificarComer(Celda celda);
     public void notificarHistorial(String movimiento);
 }
