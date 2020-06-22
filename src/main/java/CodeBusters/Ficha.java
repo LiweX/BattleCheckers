@@ -1,5 +1,3 @@
-package codebusters;
-
 import javax.swing.ImageIcon;
 
 public class Ficha {
