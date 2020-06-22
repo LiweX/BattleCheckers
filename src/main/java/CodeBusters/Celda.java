@@ -1,5 +1,3 @@
-package codebusters;
-
 import javax.swing.JButton;
 
 public class Celda extends JButton {
