@@ -37,12 +37,12 @@ public class Juego implements SujetoObservable {
     }
 
     @Override
-    public void notificarMover(Celda destino){
+    public void notificarMover(Celda destino) {
         tablero.updateMover(celdaSeleccionada, destino);
     }
 
     @Override
-    public void notificarHistorial(String movimiento){
+    public void notificarHistorial(String movimiento) {
         estadisticas.updateHistorial(movimiento);
     }
     
@@ -101,7 +101,8 @@ public class Juego implements SujetoObservable {
     public void seleccionarFicha(Celda celda) {
         ArrayList<Celda> contiguas = celdasContiguas(celda);
         
-        if(celda==celdaSeleccionada) {
+        if(celda.equals(celdaSeleccionada)) {
+            System.out.println("Las celdas son las mismas che");
             for(Celda casilla : contiguas)
                 notificarPintar(casilla);
         } else {
@@ -138,5 +139,9 @@ public class Juego implements SujetoObservable {
 
     public Celda getCeldaAnterior() {
         return celdaSeleccionada;
+    }
+
+    public Estadisticas getEstadisticas() {
+        return estadisticas;
     }
 }

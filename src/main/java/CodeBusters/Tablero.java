@@ -98,13 +98,14 @@ public class Tablero extends JFrame implements ActionListener,Observador {
         if(e.getSource()==nuevaPartida) {
             PedirNombres pedirNombres = new PedirNombres();
             
-            pedirNombres.setBounds(0,0,240,170);
+            pedirNombres.setBounds(0,0,300,170);
             pedirNombres.setVisible(true);
             pedirNombres.setResizable(false);
             pedirNombres.setLocationRelativeTo(null);
             pedirNombres.setTitle("Ingresar nombres");
             
             this.setVisible(false);
+            game.getEstadisticas().setVisible(false);
         } else if(e.getSource()==salir) {
             System.exit(0);
         } else if(e.getSource()==comoJugar) {
@@ -123,12 +124,13 @@ public class Tablero extends JFrame implements ActionListener,Observador {
                 for(int j=0; j<8; j++)
                     if(((i%2==0 && j%2!=0) || (i%2!=0 && j%2==0)) && e.getSource()==celdas[i][j]) {
                         if(celdas[i][j].hayFicha() && porMover && game.getCeldaAnterior().equals(celdas[i][j])) {
-                            game.seleccionarFicha(celdas[i][j]);
-                        }
-                        if(celdas[i][j].hayFicha() && !porMover) {
                             toggleMoviendo();
                             game.seleccionarFicha(celdas[i][j]);
-                        } if(!celdas[i][j].hayFicha() && porMover && celdas[i][j].getBackground()!=black) {
+                            System.out.println("Entré al shitting, moviendo: " + porMover);
+                        } else if(celdas[i][j].hayFicha() && !porMover) {
+                            toggleMoviendo();
+                            game.seleccionarFicha(celdas[i][j]);
+                        } else if(!celdas[i][j].hayFicha() && porMover && celdas[i][j].getBackground()!=black) {
                             toggleMoviendo();
                             game.moverFicha(celdas[i][j]);
                         }
