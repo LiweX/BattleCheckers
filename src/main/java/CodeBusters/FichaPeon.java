@@ -1,5 +1,3 @@
-package codebusters;
-
 import java.util.ArrayList;
 
 public class FichaPeon implements Algoritmo {
