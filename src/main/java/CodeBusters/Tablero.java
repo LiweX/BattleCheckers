@@ -123,16 +123,28 @@ public class Tablero extends JFrame implements ActionListener,Observador {
             for(int i=0; i<8; i++)
                 for(int j=0; j<8; j++)
                     if(((i%2==0 && j%2!=0) || (i%2!=0 && j%2==0)) && e.getSource()==celdas[i][j]) {
-                        if(celdas[i][j].hayFicha() && porMover && game.getCeldaAnterior().equals(celdas[i][j])) {
-                            toggleMoviendo();
-                            game.seleccionarFicha(celdas[i][j]);
-                            System.out.println("Entré al shitting, moviendo: " + porMover);
-                        } else if(celdas[i][j].hayFicha() && !porMover) {
-                            toggleMoviendo();
-                            game.seleccionarFicha(celdas[i][j]);
-                        } else if(!celdas[i][j].hayFicha() && porMover && celdas[i][j].getBackground()!=black) {
-                            toggleMoviendo();
-                            game.moverFicha(celdas[i][j]);
+                        if(celdas[i][j].hayFicha()) {
+                            if((turnoBlancas && celdas[i][j].getFicha().getColor()==ColorFicha.BLANCA) || (!turnoBlancas && celdas[i][j].getFicha().getColor()==ColorFicha.ROJA)) {
+                                if((porMover && game.getCeldaAnterior().equals(celdas[i][j]))) {
+                                    toggleMoviendo();
+                                    game.seleccionarFicha(celdas[i][j]);
+                                } else if(celdas[i][j].hayFicha() && !porMover) {
+                                    toggleMoviendo();
+                                    game.seleccionarFicha(celdas[i][j]);
+                                }
+                            } else {
+                                if(turnoBlancas) {
+                                    JOptionPane.showMessageDialog(null,"Es el turno de las blancas");
+                                } else {
+                                    JOptionPane.showMessageDialog(null,"Es el turno de las rojas");
+                                }
+                            }
+                        } else {
+                            if(porMover && celdas[i][j].getBackground()!=black) {
+                                toggleMoviendo();
+                                game.moverFicha(celdas[i][j]);
+                                toggleTurno();
+                            }
                         }
                     }
         }
@@ -172,7 +184,8 @@ public class Tablero extends JFrame implements ActionListener,Observador {
     }
 
     public void toggleTurno() {
-
+        if(turnoBlancas) turnoBlancas = false;
+        else turnoBlancas = true;
     }
 
     public void setJuego(Juego juego) {

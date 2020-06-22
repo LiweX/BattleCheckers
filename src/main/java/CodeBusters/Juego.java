@@ -125,7 +125,6 @@ public class Juego implements SujetoObservable {
         ArrayList<Celda> contiguas = celdasContiguas(celda);
         
         if(celda.equals(celdaSeleccionada)) {
-            System.out.println("Las celdas son las mismas che");
             for(Celda casilla : contiguas)
                 notificarPintar(casilla);
         } else {
