@@ -1,5 +1,3 @@
-package codebusters;
-
 public interface SujetoObservable {
 
     /*
