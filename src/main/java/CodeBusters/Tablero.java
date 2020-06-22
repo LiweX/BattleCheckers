@@ -23,8 +23,8 @@ public class Tablero extends JFrame implements ActionListener,Observador {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        fichaRoja = new ImageIcon("src/resources/fichaRoja.png");
-        fichaBlanca = new ImageIcon("src/resources/fichaBlanca.png");
+        fichaRoja = new ImageIcon("src/main/resources/fichaRoja.png");
+        fichaBlanca = new ImageIcon("src/main/resources/fichaBlanca.png");
         vacio = new ImageIcon();
         
     	setLayout(null);
@@ -122,14 +122,17 @@ public class Tablero extends JFrame implements ActionListener,Observador {
             for(int i=0; i<8; i++)
                 for(int j=0; j<8; j++)
                     if(((i%2==0 && j%2!=0) || (i%2!=0 && j%2==0)) && e.getSource()==celdas[i][j]) {
-                            if(celdas[i][j].hayFicha() && !porMover) {
-                                toggleMoviendo();
-                                game.seleccionarFicha(celdas[i][j]);
-                            }if(!celdas[i][j].hayFicha() && porMover){
-                                game.moverFicha(celdas[i][j]);
-                                toggleMoviendo();
-                            }
+                        if(celdas[i][j].hayFicha() && porMover && game.getCeldaAnterior().equals(celdas[i][j])) {
+                            game.seleccionarFicha(celdas[i][j]);
                         }
+                        if(celdas[i][j].hayFicha() && !porMover) {
+                            toggleMoviendo();
+                            game.seleccionarFicha(celdas[i][j]);
+                        } if(!celdas[i][j].hayFicha() && porMover && celdas[i][j].getBackground()!=black) {
+                            toggleMoviendo();
+                            game.moverFicha(celdas[i][j]);
+                        }
+                    }
         }
     }
 
@@ -138,31 +141,35 @@ public class Tablero extends JFrame implements ActionListener,Observador {
         return celdas;
     }
 
-    /*
+    /**
      *  @param  celda: Celda a pintar.
      */
     @Override
     public void updatePintar(Celda celda) {
-        if(celda.getBackground().equals(black)) {celda.setBackground(red);}
+        if(celda.getBackground().equals(black)) celda.setBackground(red);
         else celda.setBackground(black);
     }
+
     @Override
     public void updateMover(Celda origen,Celda destino){
         destino.setIcon(origen.getIcon());
         destino.hayFicha(true);
+        destino.setFicha(origen.getFicha());
         origen.setIcon(vacio);
         origen.hayFicha(false);
+        origen.setFicha(null);
     }
 
     //Setters
-    /*
+    /**
      *  @param  porMover: Indica si se está por efectuar un movimiento o no.
      */
     public void toggleMoviendo() {
-        if(porMover) {porMover=false;}
-        else porMover=true;
+        if(porMover) porMover = false;
+        else porMover = true;
     }
-    public void toggleTurno(){
+
+    public void toggleTurno() {
 
     }
 

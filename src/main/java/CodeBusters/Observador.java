@@ -7,4 +7,5 @@ public interface Observador {
      */
     public void updatePintar(Celda celda);
     public void updateMover(Celda origen,Celda destino);
+    public void updateHistorial(String movimiento);
 }

@@ -47,11 +47,11 @@ public class Celda extends JButton {
     }
 
     //Getters
-    public int getColumna(){
+    public int getColumna() {
         return columna;
     }
 
-    public int getFila(){
+    public int getFila() {
         return fila;
     }
 

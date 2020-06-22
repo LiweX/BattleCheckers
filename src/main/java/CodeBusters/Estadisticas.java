@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class Estadisticas extends JFrame implements ActionListener {
+public class Estadisticas extends JFrame implements ActionListener,Observador {
 
     private JLabel jugador1, jugador2, piezasComidas, tituloHistorial;
     private JScrollPane scrollPane;
@@ -37,6 +37,9 @@ public class Estadisticas extends JFrame implements ActionListener {
         add(tituloHistorial);
 
         historial = new JTextArea();
+        historial.setEditable(false);
+        historial.setLineWrap(true);
+        historial.setWrapStyleWord(true);
         scrollPane = new JScrollPane(historial);
         scrollPane.setBounds(10,200,266,400);
         add(scrollPane);
@@ -54,4 +57,8 @@ public class Estadisticas extends JFrame implements ActionListener {
         cantidadMovimientos++;
     }
 
+    @Override
+    public void updateHistorial(String movimiento){
+        historial.append(movimiento);
+    }
 }
