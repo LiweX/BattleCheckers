@@ -205,12 +205,14 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         origen.hayFicha(false);
         origen.setFicha(null);
 
-        if(destino.getFicha().getColor()==ColorFicha.BLANCA && destino.getFila()==7) {
+        if(destino.getFicha().getColor()==ColorFicha.BLANCA && destino.getFila()==7 && !destino.getFicha().esRey()) {
             destino.getFicha().setComportamiento(new FichaRey());
             destino.setIcon(fichaBlancaRey);
-        } else if(destino.getFicha().getColor()==ColorFicha.ROJA && destino.getFila()==0) {
+            destino.getFicha().setRey(true);
+        } else if(destino.getFicha().getColor()==ColorFicha.ROJA && destino.getFila()==0 && !destino.getFicha().esRey()) {
             destino.getFicha().setComportamiento(new FichaRey());
             destino.setIcon(fichaRojaRey);
+            destino.getFicha().setRey(true);
         }
     }
 
@@ -220,31 +222,30 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
      */
     @Override
     public void updateComer(Celda origen, Celda destino) {
-        if(origen.getFicha().getColor()==ColorFicha.BLANCA) {
-            if(destino.getColumna()==origen.getColumna()+2) { //Ficha blanca que come abajo a la derecha
-                celdas[origen.getFila()+1][origen.getColumna()+1].setFicha(null);
-                celdas[origen.getFila()+1][origen.getColumna()+1].hayFicha(false);
-                celdas[origen.getFila()+1][origen.getColumna()+1].setIcon(vacio);
-
-                
-            } else {    //Ficha blanca que come abajo a la izquierda
-                celdas[origen.getFila()+1][origen.getColumna()-1].setFicha(null);
-                celdas[origen.getFila()+1][origen.getColumna()-1].hayFicha(false);
-                celdas[origen.getFila()+1][origen.getColumna()-1].setIcon(vacio);
+        if(!origen.getFicha().esRey()) {
+            if(origen.getFicha().getColor()==ColorFicha.BLANCA) {
+                if(destino.getColumna()>origen.getColumna()) { //Ficha blanca que come abajo a la derecha
+                    celdas[destino.getFila()-1][destino.getColumna()-1].setFicha(null);
+                    celdas[destino.getFila()-1][destino.getColumna()-1].hayFicha(false);
+                    celdas[destino.getFila()-1][destino.getColumna()-1].setIcon(vacio);
+                } else { //Ficha blanca que come abajo a la izquierda
+                    celdas[destino.getFila()-1][destino.getColumna()+1].setFicha(null);
+                    celdas[destino.getFila()-1][destino.getColumna()+1].hayFicha(false);
+                    celdas[destino.getFila()-1][destino.getColumna()+1].setIcon(vacio);
+                }
+            } else {
+                if(destino.getColumna()>origen.getColumna()) { //Ficha roja que come arriba a la derecha
+                    celdas[destino.getFila()+1][destino.getColumna()-1].setFicha(null);
+                    celdas[destino.getFila()+1][destino.getColumna()-1].hayFicha(false);
+                    celdas[destino.getFila()+1][destino.getColumna()-1].setIcon(vacio);
+                } else { //Ficha roja que come arriba a la izquierda
+                    celdas[destino.getFila()-1][destino.getColumna()+1].setFicha(null);
+                    celdas[destino.getFila()-1][destino.getColumna()+1].hayFicha(false);
+                    celdas[destino.getFila()-1][destino.getColumna()+1].setIcon(vacio);
+                }
             }
-            
         } else {
-            if(destino.getColumna()==origen.getColumna()+2) { //Ficha roja que come arriba a la derecha
-                celdas[origen.getFila()-1][origen.getColumna()+1].setFicha(null);
-                celdas[origen.getFila()-1][origen.getColumna()+1].hayFicha(false);
-                celdas[origen.getFila()-1][origen.getColumna()+1].setIcon(vacio);
-
-                
-            } else {    //Ficha roja que come arriba a la izquierda
-                celdas[origen.getFila()-1][origen.getColumna()-1].setFicha(null);
-                celdas[origen.getFila()-1][origen.getColumna()-1].hayFicha(false);
-                celdas[origen.getFila()-1][origen.getColumna()-1].setIcon(vacio);
-            }
+            System.out.println("SOY KING Y COMÍ");
         }
         
         destino.setIcon(origen.getIcon());
@@ -253,6 +254,16 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         origen.setIcon(vacio);
         origen.hayFicha(false);
         origen.setFicha(null);
+
+        if(destino.getFicha().getColor()==ColorFicha.BLANCA && destino.getFila()==7 && !destino.getFicha().esRey()) {
+            destino.getFicha().setComportamiento(new FichaRey());
+            destino.setIcon(fichaBlancaRey);
+            destino.getFicha().setRey(true);
+        } else if(destino.getFicha().getColor()==ColorFicha.ROJA && destino.getFila()==0 && !destino.getFicha().esRey()) {
+            destino.getFicha().setComportamiento(new FichaRey());
+            destino.setIcon(fichaRojaRey);
+            destino.getFicha().setRey(true);
+        }
     }
 
     //Setters
