@@ -72,3 +72,7 @@ public class PedirNombres extends JFrame implements ActionListener {
                 tablero.setJuego(juego);
                 tablero.setLetras();
                 tablero.setNumeros();
+            }
+        }
+    }
+}
