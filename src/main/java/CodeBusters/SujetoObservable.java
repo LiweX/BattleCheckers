@@ -1,9 +1,7 @@
 /**
- * @author  Luna, Lihué Leandro
- *          Merino, Mateo
- *          Bonino, Francisco Ignacio
- * 
- * @since   22/06/2020
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
  */
 
 public interface SujetoObservable {

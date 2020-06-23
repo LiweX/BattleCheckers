@@ -1,3 +1,9 @@
+/**
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
+ */
+
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -37,14 +43,17 @@ public class PedirNombres extends JFrame implements ActionListener {
         add(aceptar);
     }
 
-    /*
-     *  @param  n1, n2: Nombres a comparar.
+    /**
+     * @param n1,n2 Nombres a comparar.
      */
     public boolean chequearNombres(String n1, String n2) {
         if(n1.equals("") || n2.equals("") || n1.equals(n2)) return false;
         else return true;
     }
 
+    /**
+     * @param e Evento de 'click' en algún botón de la ventana.
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==aceptar) {
             nombre1 = cuadroTexto1.getText().trim();

@@ -1,8 +1,9 @@
 /**
- * @author  Luna, Lihué Leandro
- *          Merino, Mateo
- *          Bonino, Francisco Ignacio
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
  */
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -28,45 +29,60 @@ public class Juego implements SujetoObservable {
         fichasJ1 = 0;
         fichasJ2 = 0;
     }
-
-    //Setters
   
-    //Overrides
+    //-------------------Overrides-------------------
+
     /**
-     *  @param celda: Celda que debe ser pintada.
+     * @param celda Celda que debe ser pintada/despintada.
      */
     @Override
     public void notificarPintarMover(Celda celda) {
         tablero.updatePintarMover(celda);
     }
 
+    /**
+     * @param celda Celda que debe ser pintada/despintada.
+     */
     @Override
     public void notificarPintarComer(Celda celda) {
         tablero.updatePintarComer(celda);
     }
 
+    /**
+     * @param destino Celda involucrada en movimiento de pieza.
+     */
     @Override
     public void notificarMover(Celda destino) {
         tablero.updateMover(celdaSeleccionada, destino);
     }
 
+    /**
+     * @param destino Celda involucrada en eliminación de pieza.
+     */
     @Override
     public void notificarComer(Celda destino) {
         tablero.updateComer(celdaSeleccionada, destino);
     }
 
+    /**
+     * @param movimiento Movimiento a desplegar en el historial.
+     */
     @Override
     public void notificarHistorial(String movimiento) {
         estadisticas.updateHistorial(movimiento);
     }
 
+    /**
+     * @param fichasJ1 Cantidad de fichas comidas por el jugador de fichas rojas.
+     * @param fichasJ2 Cantidad de fichas comidas por el jugador de fichas blancas.
+     */
     @Override
     public void notificarComidas(int fichas1, int fichas2) {
         estadisticas.updateComidas(fichas1,fichas2);
     }
     
     /**
-     * @param   celda:  Celda seleccionada. Se pintarán las casillas para moverse o comer desde esta celda.
+     * @param celda Celda seleccionada. Se pintarán las casillas para moverse o comer desde esta celda.
      */
     public void seleccionarFicha(Celda celda) {
         adyacentes = celda.getFicha().celdasContiguas(celda, tablero.getCeldas());
@@ -102,7 +118,7 @@ public class Juego implements SujetoObservable {
     }
 
     /**
-     * @param   celda:  Celda donde está la ficha que queremos mover.
+     * @param celda Celda donde está la ficha que queremos mover.
      */
     public void moverFicha(Celda celda) {
         for(Celda casilla : adyacentes)
@@ -130,8 +146,8 @@ public class Juego implements SujetoObservable {
     }
 
     /**
-     * @param   num Número de fila. Será cambiado por su letra correspondiente.
-     * @return  Letra correspondiente a la fila.
+     * @param num Número de fila. Será cambiado por su letra correspondiente.
+     * @return Letra correspondiente a la fila.
      */
     public String getLetra(int num) {
         switch(num) {
@@ -163,7 +179,7 @@ public class Juego implements SujetoObservable {
     }
 
     /**
-     * @param   celda:  Celda donde está la ficha que quiere moverse y comer una ficha enemiga.
+     * @param celda Celda donde está la ficha que quiere moverse y comer una ficha enemiga.
      */
     public void comerFicha(Celda celda) {
         for(Celda casilla : eliminar)
@@ -204,16 +220,17 @@ public class Juego implements SujetoObservable {
         }
     }
 
-    //Getters
+    //-------------------Getters-------------------
+
     /**
-     * @return  Celda seleccionada en el click anterior.
+     * @return Celda seleccionada en el click anterior.
      */
     public Celda getCeldaAnterior() {
         return celdaSeleccionada;
     }
 
     /**
-     * @return  Objeto estadísticas del juego.
+     * @return Objeto estadísticas del juego.
      */
     public Estadisticas getEstadisticas() {
         return estadisticas;

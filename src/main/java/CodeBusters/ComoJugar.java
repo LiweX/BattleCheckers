@@ -1,3 +1,9 @@
+/**
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
+ */
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -37,6 +43,9 @@ public class ComoJugar extends JFrame implements ActionListener {
         add(imagenTutorial);
     }
 
+    /**
+     * @param e Evento de 'click' en algún botón.
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==atras) {
             if(numPagina==1) atras.setEnabled(false);

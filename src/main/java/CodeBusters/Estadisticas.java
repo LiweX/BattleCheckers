@@ -1,3 +1,9 @@
+/**
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
+ */
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -51,19 +57,36 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
         add(scrollPane);
     }
 
+    //-------------------Getters-------------------
+
+    /**
+     * @return Nombre del jugador de piezas blancas.
+     */
     public String getNombreJugador1() {
         return jugador1.getText().replace(":","");
     }
 
+    /**
+     * @return Nombre del jugador de piezas rojas.
+     */
     public String getNombreJugador2() {
         return jugador2.getText().replace(":","");
     }
 
+    //-------------------Overrides-------------------
+
+    /**
+     * @param movimiento Movimiento a agregar al historial.
+     */
     @Override
     public void updateHistorial(String movimiento) {
         historial.append(movimiento);
     }
 
+    /**
+     * @param fichasJ1 Fichas comidas por el jugador de fichas rojas.
+     * @param fichasJ2 Fichas comidas por el jugador de fichas blancas
+     */
     @Override
     public void updateComidas(int fichasJ1, int fichasJ2) {
         comidasJ1.setText(Integer.toString(fichasJ2));

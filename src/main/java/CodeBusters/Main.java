@@ -1,9 +1,11 @@
 /**
- * @author  Luna, Lihué Leandro
- *          Merino, Mateo
- *          Bonino, Francisco Ignacio
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
  */
+
 public class Main {
+    
     MenuPrincipal menu;
     ComoJugar tutorial;
     

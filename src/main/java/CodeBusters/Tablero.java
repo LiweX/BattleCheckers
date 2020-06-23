@@ -1,7 +1,7 @@
 /**
- * @author  Luna, Lihué Leandro.
- * @author  Merino, Mateo.
- * @author  Bonino, Francisco Ignacio.
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
  */
 
 import java.awt.*;
@@ -82,7 +82,7 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
                         celda = new Celda(i,j,true,ficha);
                         celda.setIcon(ficha.getIcon());
                     } else {
-                        celda = new Celda(i,j,false);
+                        celda = new Celda(i,j);
                         celda.setIcon(vacio);
                     }
 
@@ -102,7 +102,7 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     }
     
     /**
-     * @param   e   Evento de 'click' en algún botón del tablero.
+     * @param e Evento de 'click' en algún botón del tablero.
      */
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==nuevaPartida) {
@@ -163,13 +163,30 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         }
     }
 
-    //Getters
+    //-------------------Getters-------------------
+
     /**
      * @return  Matriz de casillas del tablero.
      */
     public Celda[][] getCeldas() {
         return celdas;
     }
+
+    /**
+     * @return  Si voy a mover o no.
+     */
+    public boolean getMoviendo() {
+        return porMover;
+    }
+
+    /**
+     * @return  Turno del jugador.
+     */
+    public boolean getTurno() {
+        return turnoBlancas;
+    }
+
+    //-------------------Overrides-------------------
 
     /**
      *  @param  celda   Celda a pintar.
@@ -184,7 +201,7 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     }
     
     /**
-     * @param   celda   Celda a pintar.
+     * @param celda Celda a pintar.
      */
     @Override
     public void updatePintarComer(Celda celda) {
@@ -193,8 +210,8 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     }
 
     /**
-     * @param   origen  Celda origen del movimiento.
-     * @param   destino Celda destino del movimiento.
+     * @param origen Celda origen del movimiento.
+     * @param destino Celda destino del movimiento.
      */
     @Override
     public void updateMover(Celda origen, Celda destino) {
@@ -217,8 +234,8 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     }
 
     /**
-     * @param   origen  Celda origen cuya ficha va a moverse y comer.
-     * @param   destino Celda destino donde la ficha que se mueve y come va a llegar.
+     * @param origen Celda origen cuya ficha va a moverse y comer.
+     * @param destino Celda destino donde la ficha que se mueve y come va a llegar.
      */
     @Override
     public void updateComer(Celda origen, Celda destino) {
@@ -258,7 +275,8 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         }
     }
 
-    //Setters
+    //-------------------Setters-------------------
+
     public void toggleMoviendo() {
         if(porMover) porMover = false;
         else porMover = true;
@@ -282,13 +300,6 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         }
     }
 
-    /**
-     * @return  Si voy a mover o no.
-     */
-    public boolean getMoviendo() {
-        return porMover;
-    }
-
     public void toggleTurno() {
         if(turnoBlancas) turnoBlancas = false;
         else turnoBlancas = true;
@@ -296,12 +307,5 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
 
     public void setJuego(Juego juego) {
         game = juego;
-    }
-
-    /**
-     * @return  Turno del jugador.
-     */
-    public boolean getTurno() {
-        return turnoBlancas;
     }
 }

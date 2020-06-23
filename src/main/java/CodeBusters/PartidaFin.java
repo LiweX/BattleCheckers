@@ -1,3 +1,9 @@
+/**
+ * @author Luna, Lihué Leandro
+ * @author Merino, Mateo
+ * @author Bonino, Francisco Ignacio
+ */
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -10,6 +16,12 @@ public class PartidaFin extends JFrame implements ActionListener {
     private Estadisticas estadisticas;
     private Tablero tablero;
 
+    /**
+     * Constructor de ventana de fin de partida.
+     * @param mensaje Mensaje a desplegar.
+     * @param estadisticas Ventana de estadísticas a eliminar.
+     * @param tablero Ventana de tablero a eliminar.
+     */
     public PartidaFin(String mensaje, Estadisticas estadisticas, Tablero tablero) {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
@@ -33,6 +45,9 @@ public class PartidaFin extends JFrame implements ActionListener {
         this.tablero = tablero;
     }
 
+    /**
+     * @param e Evento de 'click' en algún botón de la ventana.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==boton) {
