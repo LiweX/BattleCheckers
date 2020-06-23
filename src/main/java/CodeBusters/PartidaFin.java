@@ -42,6 +42,26 @@ public class PartidaFin extends JFrame implements ActionListener {
             tablero.setVisible(false);
             
             MenuPrincipal menu = new MenuPrincipal();
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==boton) {
+            this.setVisible(false);
+            
+            estadisticas.setVisible(false);
+            tablero.setVisible(false);
+            
+            MenuPrincipal menu = new MenuPrincipal();
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==boton) {
+            this.setVisible(false);
+            
+            estadisticas.setVisible(false);
+            tablero.setVisible(false);
+            
+            MenuPrincipal menu = new MenuPrincipal();
             
             menu.setBounds(0,0,300,600);
             menu.setVisible(true);

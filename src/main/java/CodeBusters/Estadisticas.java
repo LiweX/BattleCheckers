@@ -51,6 +51,30 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
         add(scrollPane);
     }
 
+    public String getNombreJugador1() {
+        return jugador1.getText().replace(":","");
+    }
+
+    public String getNombreJugador2() {
+        return jugador2.getText().replace(":","");
+    }
+
+    public String getNombreJugador1() {
+        return jugador1.getText().replace(":","");
+    }
+
+    public String getNombreJugador2() {
+        return jugador2.getText().replace(":","");
+    }
+
+    public String getNombreJugador1() {
+        return jugador1.getText().replace(":","");
+    }
+
+    public String getNombreJugador2() {
+        return jugador2.getText().replace(":","");
+    }
+
     @Override
     public void updateHistorial(String movimiento) {
         historial.append(movimiento);
