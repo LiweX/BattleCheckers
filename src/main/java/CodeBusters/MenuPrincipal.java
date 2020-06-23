@@ -1,7 +1,8 @@
 /**
- * @author Luna, Lihué Leandro
- * @author Merino, Mateo
- * @author Bonino, Francisco Ignacio
+ * @author  Luna, Lihué Leandro
+ *          Merino, Mateo
+ *          Bonino, Francisco Ignacio
+ * @since   22/06/2020
  */
 import java.awt.*;
 import java.awt.event.*;
@@ -22,7 +23,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
         
         tutorial = new ComoJugar();
 
-        tutorial.setBounds(0,0,640,450);
+        tutorial.setBounds(0,0,580,490);
         tutorial.setResizable(false);
         tutorial.setLocationRelativeTo(null);
         tutorial.setTitle("Como Jugar");
