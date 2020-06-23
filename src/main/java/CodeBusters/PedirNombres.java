@@ -50,25 +50,25 @@ public class PedirNombres extends JFrame implements ActionListener {
             nombre1 = cuadroTexto1.getText().trim();
             nombre2 = cuadroTexto2.getText().trim();
             
-            if(!chequearNombres(nombre1,nombre2)) JOptionPane.showMessageDialog(null,"Ambos jugadores deben tener nombres y deben ser distintos");
+            if(!chequearNombres(nombre1,nombre2)) JOptionPane.showMessageDialog(null, "Ambos jugadores deben tener nombres y deben ser distintos", "Error", 0);
             else {
                 Tablero tablero = new Tablero();
                 
-                tablero.setBounds(0,0,646,692);
+                tablero.setBounds(0,0,666,712);
                 tablero.setVisible(true);
                 tablero.setResizable(false);
+                tablero.setTitle("Tablero");
 
                 Estadisticas estadisticas = new Estadisticas();
                 
-                estadisticas.setBounds(650,0,300,650);
+                estadisticas.setBounds(670,0,300,650);
                 estadisticas.setVisible(true);
                 estadisticas.setResizable(false);
+                estadisticas.setTitle("Estadisticas");
                 
                 this.setVisible(false);
                 Main.jugando = true;
                 Juego juego = new Juego(tablero,estadisticas);
                 tablero.setJuego(juego);
-            }
-        }
-    }
-}
+                tablero.setLetras();
+                tablero.setNumeros();

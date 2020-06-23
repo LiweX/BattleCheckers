@@ -9,6 +9,7 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
     private JTextArea historial;
 
     public Estadisticas() {
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
 
         comidasJ1 = new JLabel("0");
@@ -21,7 +22,7 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
         comidasJ2.setBounds(50,135,200,20);
         add(comidasJ2);
 
-        piezasComidas = new JLabel("Piezas comidas");
+        piezasComidas = new JLabel("Piezas eliminadas");
         piezasComidas.setFont(new Font("Arial",3,18));
         piezasComidas.setBounds(60,20,200,20);
         add(piezasComidas);
@@ -59,19 +60,3 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
     public void updateComidas(int fichasJ1, int fichasJ2) {
         comidasJ1.setText(Integer.toString(fichasJ2));
         comidasJ2.setText(Integer.toString(fichasJ1));
-
-        if(fichasJ1==12) {
-            JOptionPane.showMessageDialog(null,"Ganó el jugador de las fichas ROJAS!");
-        } else if(fichasJ2==12) {
-            JOptionPane.showMessageDialog(null,"Ganó el jugador de las fichas BLANCAS!");
-        }
-    }
-
-    public String getNombreJugador1() {
-        return jugador1.getText();
-    }
-
-    public String getNombreJugador2() {
-        return jugador2.getText();
-    }
-}

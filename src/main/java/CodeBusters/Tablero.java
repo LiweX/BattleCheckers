@@ -23,8 +23,8 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
 
     public Tablero() {
         black = new Color(0,0,0);
-        red = new Color(255,0,0);
-        green = new Color(0,255,0);
+        red = new Color(200,0,0);
+        green = new Color(0,200,0);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -34,7 +34,7 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         fichaBlancaRey = new ImageIcon(getClass().getResource("fichaBlancaRey.png"));
         vacio = new ImageIcon();
         
-    	setLayout(null);
+        setLayout(null);
         
         menubar = new JMenuBar();
 
@@ -127,7 +127,7 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
             tutorial.setLocationRelativeTo(null);
             tutorial.setTitle("Como Jugar");
         } else if(e.getSource()==acercaDe) {
-            JOptionPane.showMessageDialog(null,"aca va info nuestra");
+            JOptionPane.showMessageDialog(null, "©CodeBusters - 2020\nTP Final - Ingeniería de Software", "Acerca de...", 1);
         }
         else {
             for(int i=0; i<8; i++)
@@ -143,9 +143,9 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
                                 }
                             } else {
                                 if(turnoBlancas) {
-                                    JOptionPane.showMessageDialog(null,"Es el turno de las blancas");
+                                    JOptionPane.showMessageDialog(null, "¡Es el turno de las blancas!", "¡Advertencia!", 2);
                                 } else {
-                                    JOptionPane.showMessageDialog(null,"Es el turno de las rojas");
+                                    JOptionPane.showMessageDialog(null, "¡Es el turno de las rojas!", "¡Advertencia!", 2);
                                 }
                             }
                         } else {
@@ -222,30 +222,22 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
      */
     @Override
     public void updateComer(Celda origen, Celda destino) {
-        if(!origen.getFicha().esRey()) {
-            if(origen.getFicha().getColor()==ColorFicha.BLANCA) {
-                if(destino.getColumna()>origen.getColumna()) { //Ficha blanca que come abajo a la derecha
-                    celdas[destino.getFila()-1][destino.getColumna()-1].setFicha(null);
-                    celdas[destino.getFila()-1][destino.getColumna()-1].hayFicha(false);
-                    celdas[destino.getFila()-1][destino.getColumna()-1].setIcon(vacio);
-                } else { //Ficha blanca que come abajo a la izquierda
-                    celdas[destino.getFila()-1][destino.getColumna()+1].setFicha(null);
-                    celdas[destino.getFila()-1][destino.getColumna()+1].hayFicha(false);
-                    celdas[destino.getFila()-1][destino.getColumna()+1].setIcon(vacio);
-                }
-            } else {
-                if(destino.getColumna()>origen.getColumna()) { //Ficha roja que come arriba a la derecha
-                    celdas[destino.getFila()+1][destino.getColumna()-1].setFicha(null);
-                    celdas[destino.getFila()+1][destino.getColumna()-1].hayFicha(false);
-                    celdas[destino.getFila()+1][destino.getColumna()-1].setIcon(vacio);
-                } else { //Ficha roja que come arriba a la izquierda
-                    celdas[destino.getFila()-1][destino.getColumna()+1].setFicha(null);
-                    celdas[destino.getFila()-1][destino.getColumna()+1].hayFicha(false);
-                    celdas[destino.getFila()-1][destino.getColumna()+1].setIcon(vacio);
-                }
-            }
+        if(destino.getFila()>origen.getFila() && destino.getColumna()>origen.getColumna()) {
+            celdas[destino.getFila()-1][destino.getColumna()-1].setFicha(null);
+            celdas[destino.getFila()-1][destino.getColumna()-1].hayFicha(false);
+            celdas[destino.getFila()-1][destino.getColumna()-1].setIcon(vacio);
+        } else if(destino.getFila()<origen.getFila() && destino.getColumna()>origen.getColumna()) {
+            celdas[destino.getFila()+1][destino.getColumna()-1].setFicha(null);
+            celdas[destino.getFila()+1][destino.getColumna()-1].hayFicha(false);
+            celdas[destino.getFila()+1][destino.getColumna()-1].setIcon(vacio);
+        } else if(destino.getFila()>origen.getFila() && destino.getColumna()<origen.getColumna()) {
+            celdas[destino.getFila()-1][destino.getColumna()+1].setFicha(null);
+            celdas[destino.getFila()-1][destino.getColumna()+1].hayFicha(false);
+            celdas[destino.getFila()-1][destino.getColumna()+1].setIcon(vacio);
         } else {
-            System.out.println("SOY KING Y COMÍ");
+            celdas[destino.getFila()+1][destino.getColumna()+1].setFicha(null);
+            celdas[destino.getFila()+1][destino.getColumna()+1].hayFicha(false);
+            celdas[destino.getFila()+1][destino.getColumna()+1].setIcon(vacio);
         }
         
         destino.setIcon(origen.getIcon());
@@ -270,6 +262,24 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
     public void toggleMoviendo() {
         if(porMover) porMover = false;
         else porMover = true;
+    }
+
+    public void setLetras() {
+        for(int i=0; i<8; i++) {
+            JLabel label = new JLabel(game.getLetra(i));
+            label.setFont(new Font("Arial",1,16));
+            label.setBounds(35 + 80*i, 642, 16, 16);
+            add(label);
+        }
+    }
+
+    public void setNumeros() {
+        for(int i=0; i<8; i++) {
+            JLabel numero = new JLabel(Integer.toString(i+1));
+            numero.setFont(new Font("Arial",1,16));
+            numero.setBounds(645, 35 + 80*i, 16, 16);
+            add(numero);
+        }
     }
 
     /**

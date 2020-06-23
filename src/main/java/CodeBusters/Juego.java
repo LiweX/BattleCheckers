@@ -113,9 +113,53 @@ public class Juego implements SujetoObservable {
 
         notificarMover(celda);
 
-        String movimiento = Integer.toString(celdaSeleccionada.getFila()) + "," + Integer.toString(celdaSeleccionada.getColumna()) + " >> " + Integer.toString(celda.getFila()) + "," + Integer.toString(celda.getColumna())+"\n";
+        String nombreJugador;
+
+        if(celda.getFicha().getColor()==ColorFicha.BLANCA) {
+            nombreJugador = estadisticas.getNombreJugador1();
+        } else {
+            nombreJugador = estadisticas.getNombreJugador2();
+        }
+
+        String movimiento = nombreJugador + " movió: " + getLetra(celdaSeleccionada.getFila()) +
+                            Integer.toString(celdaSeleccionada.getColumna()+1) + " >> " +
+                            getLetra(celda.getFila()) +
+                            Integer.toString(celda.getColumna()+1)+"\n";
         
         notificarHistorial(movimiento);
+    }
+
+    /**
+     * @param   num Número de fila. Será cambiado por su letra correspondiente.
+     * @return  Letra correspondiente a la fila.
+     */
+    public String getLetra(int num) {
+        switch(num) {
+            case 0: {
+                return "A";
+            }
+            case 1: {
+                return "B";
+            }
+            case 2: {
+                return "C";
+            }
+            case 3: {
+                return "D";
+            }
+            case 4: {
+                return "E";
+            }
+            case 5: {
+                return "F";
+            }
+            case 6: {
+                return "G";
+            }
+            default: {
+                return "H";
+            }
+        }
     }
 
     /**
@@ -137,6 +181,27 @@ public class Juego implements SujetoObservable {
         }
 
         notificarComidas(fichasJ1,fichasJ2);
+
+        String nombreJugador;
+
+        if(celda.getFicha().getColor()==ColorFicha.BLANCA) {
+            nombreJugador = estadisticas.getNombreJugador1();
+        } else {
+            nombreJugador = estadisticas.getNombreJugador2();
+        }
+
+        String movimiento = nombreJugador + " eliminó: " + getLetra(celdaSeleccionada.getFila()) +
+                            Integer.toString(celdaSeleccionada.getColumna()+1) + " >> " +
+                            getLetra(celda.getFila()) +
+                            Integer.toString(celda.getColumna()+1)+"\n";
+        
+        notificarHistorial(movimiento);
+
+        if(fichasJ2==12) {
+            PartidaFin fin = new PartidaFin("¡Ganó el jugador " + estadisticas.getNombreJugador1() + "!",estadisticas,tablero);
+        } else if(fichasJ1==12) {
+            PartidaFin fin = new PartidaFin("¡Ganó el jugador " + estadisticas.getNombreJugador2() + "!",estadisticas,tablero);
+        }
     }
 
     //Getters
