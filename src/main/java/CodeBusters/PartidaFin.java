@@ -36,26 +36,6 @@ public class PartidaFin extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==boton) {
-        boton.addActionListener(this);
-        add(boton);
-
-        this.estadisticas = estadisticas;
-        this.tablero = tablero;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==boton) {
-        boton.addActionListener(this);
-        add(boton);
-
-        this.estadisticas = estadisticas;
-        this.tablero = tablero;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==boton) {
             this.setVisible(false);
             
             estadisticas.setVisible(false);

@@ -60,3 +60,5 @@ public class Estadisticas extends JFrame implements ObservadorEstadisticas {
     public void updateComidas(int fichasJ1, int fichasJ2) {
         comidasJ1.setText(Integer.toString(fichasJ2));
         comidasJ2.setText(Integer.toString(fichasJ1));
+    }
+}
