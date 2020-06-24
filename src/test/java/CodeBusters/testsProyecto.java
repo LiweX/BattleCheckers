@@ -1,5 +1,5 @@
 /**
- * @author Luna, Lihué Leandro
+ * @author Luna, Lihue Leandro
  * @author Merino, Mateo
  * @author Bonino, Francisco Ignacio
  */
@@ -48,35 +48,35 @@ public class testsProyecto {
         fichaTest = new Ficha(ColorFicha.BLANCA,fichaBlanca);
     }
 
-    //Test que evalúa distintos casos de inputs de nombres.
+    //Test que evalua distintos casos de inputs de nombres.
     @Test
     public void nameTest() {
         assertEquals(false,pedirNombres.chequearNombres(nombre1,nombre1)); //Dos nombres iguales.
         assertEquals(true,pedirNombres.chequearNombres(nombre1,nombre2));  //Dos nombres distintos.
-        assertEquals(false,pedirNombres.chequearNombres(nombre1,nombre3)); //Un nombre vacío.
+        assertEquals(false,pedirNombres.chequearNombres(nombre1,nombre3)); //Un nombre vacio.
     }
     
-    //Test que evalúa un intento de selección de ficha en una celda vacía.
+    //Test que evalua un intento de selecciï¿½n de ficha en una celda vacia.
     @Test (expected = NullPointerException.class)
     public void fichaSelectionTest() throws NullPointerException {
     	juego.seleccionarFicha(testSelectionNull);
     }
     
-    //Test que evalúa la cantidad de casillas que tienem disponibles diferentes fichas.
+    //Test que evalua la cantidad de casillas que tienem disponibles diferentes fichas.
     @Test
     public void testArrayMovement() {
     	assertEquals(2,tablero.getCeldas()[5][4].getFicha().celdasContiguas(tablero.getCeldas()[5][4],tablero.getCeldas()).size()); //Ficha roja que puede moverse en diagonal arriba a ambos lados.
-    	assertEquals(1,tablero.getCeldas()[5][0].getFicha().celdasContiguas(tablero.getCeldas()[5][0],tablero.getCeldas()).size()); //Ficha roja de un costado que sólo puede moverse en diagonal arriba a la derecha.
+    	assertEquals(1,tablero.getCeldas()[5][0].getFicha().celdasContiguas(tablero.getCeldas()[5][0],tablero.getCeldas()).size()); //Ficha roja de un costado que solo puede moverse en diagonal arriba a la derecha.
     	assertEquals(0,tablero.getCeldas()[6][1].getFicha().celdasContiguas(tablero.getCeldas()[6][1],tablero.getCeldas()).size()); //Ficha roja que no puede moverse.
-    	assertEquals(1,tablero.getCeldas()[2][7].getFicha().celdasContiguas(tablero.getCeldas()[2][7],tablero.getCeldas()).size()); //Ficha blanca de un costado que sólo tiene un movimiento posible en diagonal abajo a la izquierda.
+    	assertEquals(1,tablero.getCeldas()[2][7].getFicha().celdasContiguas(tablero.getCeldas()[2][7],tablero.getCeldas()).size()); //Ficha blanca de un costado que solo tiene un movimiento posible en diagonal abajo a la izquierda.
     }
     
-    //Test que evalúa la cantidad de celdas para moverse y eliminar ficha enemiga que tiene una ficha en el medio. Se abarcan los tres casos (0, 1 y 2).
+    //Test que evalua la cantidad de celdas para moverse y eliminar ficha enemiga que tiene una ficha en el medio. Se abarcan los tres casos (0, 1 y 2).
     @Test
     public void testArrayEliminations() {
     	assertEquals(0,tablero.getCeldas()[5][4].getFicha().celdasEliminar(tablero.getCeldas()[5][4],tablero.getCeldas()).size()); //Ficha roja que no tiene ficha blanca alrededor (0).
         
-    	tablero.getCeldas()[4][3].setFicha(fichaTest); //Coloco una ficha en la posición [4][3] y testeo (1).
+    	tablero.getCeldas()[4][3].setFicha(fichaTest); //Coloco una ficha en la posicion [4][3] y testeo (1).
     	tablero.getCeldas()[4][3].hayFicha(true);
     	tablero.getCeldas()[4][3].setIcon(fichaTest.getIcon());
     	
@@ -121,7 +121,7 @@ public class testsProyecto {
     	tablero.getCeldas()[4][3].setIcon(vacio);
     }
     
-    //Test que evalúa la correcta eliminación de una ficha.
+    //Test que evalï¿½a la correcta eliminaciï¿½n de una ficha.
     @Test
     public void eliminationTest() {
     	tablero.getCeldas()[4][3].setFicha(fichaTest); //Seteo una ficha blanca en [4][3] para comerla desde [5][4].
@@ -134,7 +134,6 @@ public class testsProyecto {
     	
     	juego.seleccionarFicha(testMovement); //Como la ficha y testeo haberme movido.
     	juego.comerFicha(eliminar.get(0));
-    	//juego.seleccionarFicha(eliminar.get(0));
     	
     	assertEquals(fichaMovementTest,eliminar.get(0).getFicha());
     	
