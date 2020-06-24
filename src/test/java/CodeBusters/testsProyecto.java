@@ -18,12 +18,11 @@ public class testsProyecto {
 
     }
 
-    //Test que evalua distintos casos de inputs de nombres.
     @Test
     public void nameTest() {
-        Assert.assertEquals(false,pedirNombres.chequearNombres(nombre1,nombre1)); //Dos nombres iguales.
-        Assert.assertEquals(true,pedirNombres.chequearNombres(nombre1,nombre2));  //Dos nombres distintos.
-        Assert.assertEquals(false,pedirNombres.chequearNombres(nombre1,nombre3)); //Un nombre vacio.
+        Assert.assertEquals(false,pedirNombres.chequearNombres(nombre1,nombre1));
+        Assert.assertEquals(true,pedirNombres.chequearNombres(nombre1,nombre2));
+        Assert.assertEquals(false,pedirNombres.chequearNombres(nombre1,nombre3));
     }
     
     
