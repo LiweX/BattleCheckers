@@ -1,16 +1,8 @@
-/**
- * @author Luna, Lihue Leandro
- * @author Merino, Mateo
- * @author Bonino, Francisco Ignacio
- */
-
-import javax.swing.ImageIcon;
-
-import org.junit.BeforeClass;
 import org.junit.Test;
-
+import org.junit.BeforeClass;
 import org.junit.Assert;
 
+import javax.swing.ImageIcon;
 import java.util.ArrayList;
 
 public class testsProyecto {
