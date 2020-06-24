@@ -1,6 +1,7 @@
 import org.junit.Test;
-import org.junit.BeforeClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
+
 
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
