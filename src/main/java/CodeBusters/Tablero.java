@@ -121,7 +121,7 @@ public class Tablero extends JFrame implements ActionListener,ObservadorTablero 
         } else if(e.getSource()==comoJugar) {
             ComoJugar tutorial = new ComoJugar();
             
-            tutorial.setBounds(0,0,640,450);
+            tutorial.setBounds(0,0,580,490);
             tutorial.setVisible(true);
             tutorial.setResizable(false);
             tutorial.setLocationRelativeTo(null);
