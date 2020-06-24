@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import org.junit.Assert.*;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 
